@@ -2,12 +2,14 @@
 - name:
   hosts: all
   roles:
-    - Stouts.python
-    - Stouts.locale
-    - ANXS.utilities
+    - base
     - ANXS.hostname
+    - Stouts.locale
+    - Stouts.python
+    - ANXS.utilities
     - ANXS.ntp
     - ANXS.build-essential
     - ANXS.clojure
     - franklinkim.ufw
+    - proprietary
     - openbox

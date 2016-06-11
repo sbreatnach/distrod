@@ -1,0 +1,8 @@
+---
+- name: add repositories
+  apt_repository: repo='{{ item }}' update_cache=yes
+  with_items: proprietary.repositories
+
+- name: install proprietary packages
+  apt: name={{ item.name }}={{ item.version }} state=present
+  with_items: proprietary.packages

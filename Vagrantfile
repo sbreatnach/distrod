@@ -44,6 +44,7 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
     # Customize the amount of memory on the VM:
     vb.memory = "2048"
   end
@@ -60,5 +61,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
+    ansible.sudo_user = "root"
+    ansible.sudo = true
   end
 end

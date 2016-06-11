@@ -1,1 +1,16 @@
 ---
+openbox:
+  packages:
+    - name: xorg
+      version: 1:7.7*
+    - name: x11-xserver-utils
+      version: 7.7*
+    - name: nvidia-current
+    - name: pulseaudio
+      version: 1:8.0*
+    - name: openbox
+      version: 1:2.0.4*
+    - name: obconf
+      version: 3.6.1*
+    - name: obmenu
+      version: 1.0*
