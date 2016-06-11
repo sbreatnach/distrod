@@ -1,0 +1,17 @@
+---
+- src: ANXS.utilities
+  version: v1.0.4
+- src: ANXS.ntp
+  version: v1.1.0
+- src: ANXS.hostname
+  version: v1.1.0
+- src: ANXS.clojure
+  version: v1.0.1
+- src: ANXS.build-essential
+  version: v1.0.1
+- src: Stouts.locale
+  version: 1.0.3
+- src: franklinkim.ufw
+  version: 1.4.0
+- src: Stouts.python
+  version: 2.1.0
