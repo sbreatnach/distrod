@@ -1,5 +1,5 @@
 ---
 - name: install packages
-  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}{% endif %}
+  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
        state=present
   with_items: openbox.packages

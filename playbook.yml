@@ -2,14 +2,25 @@
 - name:
   hosts: all
   roles:
-    - base
-    - ANXS.hostname
-    - Stouts.locale
-    - Stouts.python
-    - ANXS.utilities
-    - ANXS.ntp
-    - ANXS.build-essential
-    - ANXS.clojure
-    - franklinkim.ufw
-    - proprietary
-    - openbox
+    - role: base
+      tags: [base]
+    - role: Stouts.locale
+      tags: [locale]
+    - role: Stouts.python
+      tags: [python]
+    - role: ANXS.utilities
+      tags: [utils]
+    - role: ANXS.ntp
+      tags: [ntp]
+    - role: ANXS.build-essential
+      tags: [utils]
+    - role: ANXS.clojure
+      tags: [clojure]
+    - role: franklinkim.ufw
+      tags: [firewall]
+    - role: proprietary
+      tags: [proprietary]
+    - role: openbox
+      tags: [desktop]
+  vars_files:
+    - vars/playbook.yml

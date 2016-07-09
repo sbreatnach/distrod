@@ -58,10 +58,5 @@ Vagrant.configure(2) do |config|
   # config.push.define "atlas" do |push|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbook.yml"
-    ansible.sudo_user = "root"
-    ansible.sudo = true
-  end
+  config.vm.provision "shell", path: "base_provision.sh"
 end

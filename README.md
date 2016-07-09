@@ -11,3 +11,7 @@ Works on Xenial:
 
     sudo ansible-galaxy install -r requirements.yml
 
+# Vagrant Testing
+
+    vagrant up
+    ansible-playbook -b -u vagrant --private-key .vagrant/machines/default/virtualbox/private_key -i inventory playbook.yml

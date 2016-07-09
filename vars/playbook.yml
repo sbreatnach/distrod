@@ -1,0 +1,9 @@
+---
+oracle_jdk_java_versions:
+  - 7
+  - 8
+oracle_jdk_java_version_default: 8
+clojure_versions:
+  - 1.8.0
+clojure_default_version: 1.8.0
+clojure_leiningen_version: 2.6.1

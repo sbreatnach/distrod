@@ -1,5 +1,5 @@
 ---
 apt:
   packages:
-    - git
-    - python-pip
+    - name: git
+    - name: python-pip
