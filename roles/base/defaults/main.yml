@@ -3,3 +3,9 @@ apt:
   packages:
     - name: git
     - name: python-pip
+users:
+  - username: sbreatnach
+    password: $6$l6hEH54fyq1Jkv$uIW51.hTikgZyAAmiYBcL.wIwtLfuIoEBoNyVJATyG4lZ5T40YauhfFIoqNhHW2XD3Q0LlVuHVMZOig8.Lpnm0
+    shell: /bin/bash
+    name: Shane Breatnach
+    sudoer: true

@@ -2,4 +2,12 @@
 - name: install base packages
   apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
        state=present
-  with_items: apt.packages
+  with_items: "{{ apt.packages }}"
+
+- name: create users
+  user: name={{ item.username }} comment="{{ item.name }}"
+        password={{ item.password }} shell={{ item.shell }}
+  with_items: "{{ users }}"
+
+- name: enable sudo access for appropriate users
+  template: src=sudoers.j2 dest=/etc/sudoers.d/users

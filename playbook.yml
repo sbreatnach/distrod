@@ -4,6 +4,8 @@
   roles:
     - role: base
       tags: [base]
+    - role: ANXS.hostname
+      tags: [hostname]
     - role: Stouts.locale
       tags: [locale]
     - role: Stouts.python

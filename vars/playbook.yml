@@ -7,3 +7,14 @@ clojure_versions:
   - 1.8.0
 clojure_default_version: 1.8.0
 clojure_leiningen_version: 2.6.1
+ufw_rules:
+  - port: 80
+    rule: allow
+  - port: 443
+    rule: allow
+  - port: 8443
+    rule: allow
+  - port: 22
+    rule: allow
+  - from_ip: 127.0.0.1/8
+    rule: allow

@@ -5,7 +5,7 @@
 Works on Xenial:
 
     sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev
-    sudo pip install ansible
+    sudo pip install ansible==2.1.0
 
 # Ansible Configuration
 
@@ -14,4 +14,4 @@ Works on Xenial:
 # Vagrant Testing
 
     vagrant up
-    ansible-playbook -b -u vagrant --private-key .vagrant/machines/default/virtualbox/private_key -i inventory playbook.yml
+    ansible-playbook -b -e @vm_vars.yml -u vagrant --private-key .vagrant/machines/default/virtualbox/private_key -i vm_inventory playbook.yml
