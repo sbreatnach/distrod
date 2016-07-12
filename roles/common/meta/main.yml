@@ -15,5 +15,4 @@ galaxy_info:
     - all
   galaxy_tags:
     - desktop
-dependencies:
-  - common
+dependencies: []

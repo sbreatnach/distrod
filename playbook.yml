@@ -23,6 +23,8 @@
     - role: proprietary
       tags: [proprietary]
     - role: openbox
-      tags: [desktop]
+      tags: [openbox]
+    - role: xdm
+      tags: [xdm]
   vars_files:
     - vars/playbook.yml

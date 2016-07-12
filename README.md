@@ -15,3 +15,13 @@ Works on Xenial:
 
     vagrant up
     ansible-playbook -b -e @vm_vars.yml -u vagrant --private-key .vagrant/machines/default/virtualbox/private_key -i vm_inventory playbook.yml
+
+# TODO
+
+* Configure login manager and X start script
+* Create base menu
+* Create base configuration
+* Suspend / Shutdown commands
+* Enable and test sound
+* Theming and styling of login manager
+* Theming and styling of X session

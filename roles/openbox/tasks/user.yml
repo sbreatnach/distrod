@@ -1,0 +1,4 @@
+---
+- name: create X init script
+  become_user: "{{ cur_user.username }}"
+  template: src=xinitrc.j2 dest=/home/{{ cur_user.username }}/.xinitrc mode=0744
