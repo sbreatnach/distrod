@@ -1,13 +1,8 @@
 ---
+defaults:
+  password: $6$6J3nXIJ4xZg7$RayRiuVr4oV20PBFkz7O9dKo0rzFeml6c2WWHGhYvV8cbikbnKr0MEDoGfQlF01ZOD/0HwsJBzO2/Iia2UVbf.
 users:
-  - username: sbreatnach
-    password: $6$l6hEH54fyq1Jkv$uIW51.hTikgZyAAmiYBcL.wIwtLfuIoEBoNyVJATyG4lZ5T40YauhfFIoqNhHW2XD3Q0LlVuHVMZOig8.Lpnm0
+  - username: vagrant
     shell: /bin/bash
-    name: Shane Breatnach
-    sudoer: true
-
-  - username: work
-    password: $6$l6hEH54fyq1Jkv$uIW51.hTikgZyAAmiYBcL.wIwtLfuIoEBoNyVJATyG4lZ5T40YauhfFIoqNhHW2XD3Q0LlVuHVMZOig8.Lpnm0
-    shell: /bin/bash
-    name: Work
+    name: Vagrant
     sudoer: true

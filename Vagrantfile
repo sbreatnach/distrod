@@ -64,5 +64,5 @@ Vagrant.configure(2) do |config|
   # config.push.define "atlas" do |push|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
-  config.vm.provision "shell", path: "base_provision.sh"
+  config.vm.provision "shell", path: "vm_base_provision.sh"
 end

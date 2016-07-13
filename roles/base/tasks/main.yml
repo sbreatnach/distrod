@@ -6,7 +6,7 @@
 
 - name: create users
   user: name={{ item.username }} comment="{{ item.name }}"
-        password={{ item.password }} shell={{ item.shell }}
+        password={{ item.password|default(defaults.password) }} shell={{ item.shell }}
   with_items: "{{ users }}"
 
 - name: enable sudo access for appropriate users
