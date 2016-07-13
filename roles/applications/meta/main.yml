@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Shane Breatnach
+  company: Glicsoft
+  description:
+  min_ansible_version: 2.1
+  license: BSD
+  github_branch: master
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: Debian
+    versions:
+    - all
+  galaxy_tags:
+    - desktop
+dependencies:
+  - common

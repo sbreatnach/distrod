@@ -26,5 +26,7 @@
       tags: [openbox]
     - role: xdm
       tags: [xdm]
+    - role: applications
+      tags: [applications]
   vars_files:
     - vars/playbook.yml

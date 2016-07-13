@@ -1,0 +1,11 @@
+---
+applications:
+  repositories:
+    - entry: deb https://deb.opera.com/opera-stable/ stable non-free
+      url: https://deb.opera.com/archive.key
+  packages:
+    - name: emacs24-nox
+    - name: firefox
+    - name: chromium-browser
+    - name: opera-stable
+    - url: https://downloads.vivaldi.com/stable/vivaldi-stable_1.2.490.43-1_amd64.deb
