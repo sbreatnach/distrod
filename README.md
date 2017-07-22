@@ -18,6 +18,7 @@ Works on Xenial:
 
 # TODO
 
+* Enable WiFi if needed
 * Base application list
 * Create base Openbox menu
 * Create base Openbox configuration: keyboard shortcuts, toolbar

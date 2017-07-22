@@ -4,6 +4,11 @@
        state=present
   with_items: "{{ openbox.packages }}"
 
+- name: install device packages
+  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
+       state=present
+  with_items: "{{ openbox.device_packages }}"
+
 - include: user.yml
   with_items: "{{ users }}"
   loop_control:

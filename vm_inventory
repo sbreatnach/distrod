@@ -1,2 +1,2 @@
 [devbox]
-devbox ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user=ubuntu
+devbox ansible_ssh_host=127.0.0.1 ansible_ssh_port=8453 ansible_ssh_user=ubuntu

@@ -1,1 +1,5 @@
 ---
+- name: create directories if they don't exist
+  file: path={{ defaults['dirs'][item] }} state=directory mode=0755
+  with_items:
+    - app

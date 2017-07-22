@@ -1,6 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+module OS
+    def OS.windows?
+        (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.mac?
+        (/darwin/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.unix?
+        !OS.windows?
+    end
+
+    def OS.linux?
+        OS.unix? and not OS.mac?
+    end
+end
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -22,7 +40,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 22, host: 8453
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -51,8 +69,15 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id,
                   "--monitorcount", "3",
                   "--vram", "64",
-                  "--usb", "on",
-                  "--audio", "pulse"]
+                  "--usb", "on"]
+    if OS.linux? then
+       vb.customize ["modifyvm", :id,
+                     "--audio", "pulse"]
+    end
+    if OS.mac? then
+       vb.customize ["modifyvm", :id,
+                     "--audio", "coreaudio"]
+    end
   end
   #
   # View the documentation for the provider you are using for more

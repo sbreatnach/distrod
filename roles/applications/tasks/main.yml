@@ -10,13 +10,8 @@
   apt_repository: repo='{{ item.entry }}' update_cache=yes
   with_items: "{{ applications.repositories }}"
 
-- name: install app packages by name
-  apt: state=present
-       name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
-  when: item.name is defined
-  with_items: "{{ applications.packages }}"
+- include: package.yml
+  with_items: "{{ application.packages }}"
 
-- name: install app packages by url
-  apt: state=present deb={{ item.url }}
-  when: item.url is defined
-  with_items: "{{ applications.packages }}"
+- include: package.yml
+  with_items: "{{ application.user_packages }}"

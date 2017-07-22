@@ -1,6 +1,5 @@
 ---
 oracle_jdk_java_versions:
-  - 7
   - 8
 oracle_jdk_java_version_default: 8
 clojure_versions:
