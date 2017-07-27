@@ -7,9 +7,29 @@ applications:
       url: http://repo.vivaldi.com/stable/linux_signing_key.pub
   packages:
     - name: emacs24-nox
+    - name: password-gorilla
     - name: firefox
     - name: chromium-browser
     - name: opera-stable
     - name: vivaldi-stable
 
   user_packages: []
+  menu_entries:
+    - label: Terminal
+      command: x-terminal-emulator
+    - label: Web Browser
+      command: x-www-browser
+    - label: Passwords
+      command: password-gorilla
+    - label: Browsers
+      submenu:
+      - label: Mozilla Firefox
+        command: firefox
+      - label: Chromium
+        command: chromium-browser
+      - label: Opera
+        command: opera
+      - label: Vivaldi
+        command: vivaldi
+    - label: Quit
+      command: oblogout

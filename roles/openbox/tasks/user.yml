@@ -1,4 +1,21 @@
 ---
+- name: user-specific facts
+    home_dir: /home/{{ cur_user.username }}
+    openbox_cfg_dir: /home/{{ cur_user.username }}/.config/openbox
+
+- name: create config dirs
+  become_user: "{{ cur_user.username }}"
+  file: state=directory path={{ openbox_cfg_dir }}
+
 - name: create X init script
   become_user: "{{ cur_user.username }}"
   template: src=xinitrc.j2 dest=/home/{{ cur_user.username }}/.xinitrc mode=0744
+
+- name: create openbox config files
+  become_user: "{{ cur_user.username }}"
+  template: src={{ item }}.j2 dest=/home/{{ cur_user.username }}/.config/openbox/{{ item }}
+  with_items:
+    - rc.xml
+    - environment
+    - menu.xml
+    - autostart

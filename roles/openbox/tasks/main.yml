@@ -9,6 +9,11 @@
        state=present
   with_items: "{{ openbox.device_packages }}"
 
+- name: create openbox scripts
+  template: src={{ item }}.j2 dest=/usr/bin/{{ item }} mode=0755
+  with_items:
+    - oblogout
+
 - include: user.yml
   with_items: "{{ users }}"
   loop_control:

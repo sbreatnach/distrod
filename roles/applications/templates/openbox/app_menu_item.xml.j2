@@ -1,0 +1,15 @@
+
+  {% if menu_entry.submenu is defined %}
+  <menu>
+    {% set cur_menu_entry = menu_entry %}
+    {% for sub_entry in submenu %}
+    {% set menu_entry = sub_entry %}
+    {% include "app_menu_item.xml.j2" %}
+    {% endfor %}
+    {% set menu_entry = cur_menu_entry %}
+  </menu>
+  {% else %}
+  <item label="{{ menu_entry.label }}">
+    <action name="Execute"><execute>{{ menu_entry.command }}</execute></action>
+  </item>
+  {% endif %}

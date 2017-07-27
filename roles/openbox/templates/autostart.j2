@@ -1,0 +1,7 @@
+#
+# These things are run when {{ cur_user.username }} Openbox X Session is started.
+#
+
+{% for command in openbox.autostart %}
+{{ command }}
+{% endfor %}

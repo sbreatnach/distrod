@@ -1,0 +1,19 @@
+---
+- name: install {{ item.name|default('') }}
+  apt: state=present
+       name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
+  when: item.name is defined
+
+- name: get url {{ item.url|default('') }}
+  get_url: url={{ item.url }} dest={{ defaults.dirs.tmp }}/{{ item.deb_name|default(item.archive_name) }}
+  when: item.url is defined
+
+- name: install deb {{ item.deb_name|default('') }}
+  apt: state=present deb={{ defaults.dirs.tmp }}/{{ item.deb_name }}
+  when: item.deb_name is defined
+
+- name: install archive {{ item.archive_name|default('') }}
+  unarchive: src={{ defaults.dirs.tmp }}/{{ item.archive_name }}
+             dest={{ defaults.dirs.app }} copy=no
+             creates={{ defaults.dirs.app }}/{{ item.creates }}
+  when: item.archive_name is defined

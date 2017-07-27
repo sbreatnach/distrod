@@ -19,9 +19,11 @@ Works on Xenial:
 # TODO
 
 * Enable WiFi if needed
+* Enable laptop power management if needed
 * Base application list
 * Create base Openbox menu
 * Create base Openbox configuration: keyboard shortcuts, toolbar
+* Support multiple keyboard layouts
 * Logout / Suspend / Shutdown commands
 * Enable and test sound
 * Theming and styling of login manager

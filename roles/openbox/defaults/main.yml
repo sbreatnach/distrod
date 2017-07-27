@@ -1,6 +1,64 @@
 ---
 openbox:
   device_packages: []
+  rc:
+    placement:
+      policy: UnderMouse
+      monitor: Mouse
+    theme:
+      font:
+        ActiveWindow:
+          name: sans
+          size: 11
+          weight: bold
+          slant: normal
+        InactiveWindow:
+          name: sans
+          size: 11
+          weight: bold
+          slant: normal
+        MenuHeader:
+          name: sans
+          size: 12
+          weight: normal
+          slant: normal
+        MenuItem:
+          name: sans
+          size: 12
+          weight: normal
+          slant: normal
+        ActiveOnScreenDisplay:
+          name: sans
+          size: 12
+          weight: normal
+          slant: normal
+        InactiveOnScreenDisplay:
+          name: sans
+          size: 12
+          weight: normal
+          slant: normal
+    desktops:
+      number: 2
+    keybinds:
+      - key: W-l
+        name: Execute
+        command: xscreensaver-command -lock
+      - key: W-e
+        name: Execute
+        command: rox
+        startup_notify: Rox
+      - key: W-m
+        name: MoveResizeTo
+        x: center
+        y: center
+    mouse:
+      screen_edge_warp_time: 0
+  autostart:
+    - xscreensaver -no-splash &
+    - tint2 &
+    - conky &
+  environment:
+    lang: en_IE.UTF8
   packages:
     - name: xorg
       version: "1:7.7"
@@ -13,8 +71,16 @@ openbox:
     - name: obconf
       version: "1:2.0.4"
     - name: obmenu
-      version: 1.0
+      version: "1.0"
     - name: xscreensaver
-      version: 5.34
+      version: "5.34"
     - name: terminator
-      version: 0.98
+      version: "0.98"
+    - name: scrot
+      version: "0.8*"
+    - name: rox-filer
+      version: "1:2.11*"
+    - name: fortune-mod
+      version: "1:1.99*"
+    - name: conky
+      version: "1.10*"

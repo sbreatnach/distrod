@@ -1,0 +1,20 @@
+#!/bin/sh
+
+MESSAGE=`fortune`
+xmessage -buttons Cancel:0,Logout:1,Suspend:2,Reboot:3,Shutdown:4 '${MESSAGE}'
+
+case "$?" in
+1)
+    openbox --exit
+;;
+2)
+    systemctl suspend
+;;
+3)
+    systemctl reboot
+;;
+4)
+    systemctl poweroff
+;;
+esac
+exit 0
