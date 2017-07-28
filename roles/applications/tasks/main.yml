@@ -11,7 +11,12 @@
   with_items: "{{ applications.repositories }}"
 
 - include: package.yml
-  with_items: "{{ application.packages }}"
+  with_items: "{{ applications.packages }}"
 
 - include: package.yml
-  with_items: "{{ application.user_packages }}"
+  with_items: "{{ applications.user_packages }}"
+
+- include: user.yml
+  with_items: "{{ users }}"
+  loop_control:
+    loop_var: cur_user

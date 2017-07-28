@@ -2,7 +2,7 @@
   {% if menu_entry.submenu is defined %}
   <menu>
     {% set cur_menu_entry = menu_entry %}
-    {% for sub_entry in submenu %}
+    {% for sub_entry in cur_menu_entry.submenu %}
     {% set menu_entry = sub_entry %}
     {% include "app_menu_item.xml.j2" %}
     {% endfor %}

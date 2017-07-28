@@ -1,5 +1,6 @@
 ---
 - name: user-specific facts
+  set_fact:
     home_dir: /home/{{ cur_user.username }}
     openbox_cfg_dir: /home/{{ cur_user.username }}/.config/openbox
 
