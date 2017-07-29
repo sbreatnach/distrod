@@ -20,15 +20,7 @@ Works on Xenial:
 
 * Enable WiFi if needed
 * Enable laptop power management if needed
-* Base application list
-* Create base Openbox menu
-* Create base Openbox configuration: keyboard shortcuts, toolbar
-* Support multiple keyboard layouts
-* Enable and test sound
 * Theming and styling of login manager
 * Theming and styling of X session
 * Auto-detect and configure multiple monitors
 * Integrate fancy application launcher
-* Automatic mounting of plugged in devices
-* Configure terminal emulator with correct fonts, settings, etc.
-* Extended application list for apps not in repositories e.g. Intellij IDEA

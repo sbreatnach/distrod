@@ -17,6 +17,9 @@
 - name: create Debian menu
   shell: update-menus
 
+- name: enable network manager
+  service: name=network-manager enabled=yes
+
 - include: user.yml
   with_items: "{{ users }}"
   loop_control:

@@ -21,4 +21,7 @@ xscreensaver &
 # https://wiki.archlinux.org/index.php/Polkit
 /usr/lib/policykit-1/polkitd --no-debug &
 
-exec openbox-session
+# wrap session in dbus so we can automount USB disks etc.
+# NB: note this is will cause issues if using display manager that does this for you
+# and invokes .xinitrc
+exec dbus-launch openbox-session
