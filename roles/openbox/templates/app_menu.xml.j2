@@ -5,9 +5,11 @@
         xsi:schemaLocation="http://openbox.org/
                 file:///usr/share/openbox/menu.xsd">
 
-<menu id="app-menu" label="Applications">
-  {% for entry in applications.menu_entries %}
+<menu id="/Personal" label="Applications">
+  {% for entry in openbox.menu_entries %}
   {% set menu_entry = entry %}
   {% include "app_menu_item.xml.j2" %}
   {% endfor %}
 </menu>
+
+</openbox_menu>

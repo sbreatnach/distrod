@@ -9,3 +9,7 @@ users:
     shell: /bin/bash
     name: Vagrant
     sudoer: true
+partitions:
+  - path: /
+network_devices:
+  - eth0

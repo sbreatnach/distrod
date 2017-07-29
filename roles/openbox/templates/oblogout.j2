@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MESSAGE=`fortune`
-xmessage -buttons Cancel:0,Logout:1,Suspend:2,Reboot:3,Shutdown:4 '${MESSAGE}'
+xmessage -buttons Cancel:0,Logout:1,Suspend:2,Reboot:3,Shutdown:4 "${MESSAGE}"
 
 case "$?" in
 1)

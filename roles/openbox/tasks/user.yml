@@ -2,21 +2,29 @@
 - name: user-specific facts
   set_fact:
     home_dir: /home/{{ cur_user.username }}
-    openbox_cfg_dir: /home/{{ cur_user.username }}/.config/openbox
 
 - name: create config dirs
   become_user: "{{ cur_user.username }}"
-  file: state=directory path={{ openbox_cfg_dir }}
+  file: state=directory path={{ item }}
+  with_items:
+    - "{{ home_dir }}/.config/openbox"
+    - "{{ home_dir }}/.config/conky"
+    - "{{ home_dir }}/.config/tint2"
+    - "{{ home_dir }}/.config/terminator"
 
 - name: create X init script
   become_user: "{{ cur_user.username }}"
-  template: src=xinitrc.j2 dest=/home/{{ cur_user.username }}/.xinitrc mode=0744
+  template: src=xinitrc.j2 dest={{ home_dir }}/.xinitrc mode=0744
 
-- name: create openbox config files
+- name: create config files
   become_user: "{{ cur_user.username }}"
-  template: src={{ item }}.j2 dest=/home/{{ cur_user.username }}/.config/openbox/{{ item }}
+  template: src={{ item.file }}.j2 dest={{ home_dir }}/{{ item.dir }}/{{ item.output_file|default(item.file) }}
   with_items:
-    - rc.xml
-    - environment
-    - menu.xml
-    - autostart
+    - { file: rc.xml, dir: .config/openbox }
+    - { file: environment, dir: .config/openbox }
+    - { file: menu.xml, dir: .config/openbox }
+    - { file: app_menu.xml, dir: .config/openbox }
+    - { file: autostart, dir: .config/openbox }
+    - { file: conky.conf, dir: .config/conky }
+    - { file: tint2rc, dir: .config/tint2 }
+    - { file: terminator_config, dir: .config/terminator, output_file: config }

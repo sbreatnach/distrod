@@ -15,8 +15,3 @@
 
 - include: package.yml
   with_items: "{{ applications.user_packages }}"
-
-- include: user.yml
-  with_items: "{{ users }}"
-  loop_control:
-    loop_var: cur_user

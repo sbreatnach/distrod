@@ -22,11 +22,11 @@
       tags: [firewall]
     - role: proprietary
       tags: [proprietary]
+    - role: applications
+      tags: [applications]
     - role: openbox
       tags: [openbox]
     - role: xdm
       tags: [xdm]
-    - role: applications
-      tags: [applications]
   vars_files:
     - vars/playbook.yml

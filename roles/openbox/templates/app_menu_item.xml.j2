@@ -1,6 +1,9 @@
 
+  {% if menu_entry.separator is defined %}
+  <separator />
+  {% endif %}
   {% if menu_entry.submenu is defined %}
-  <menu>
+  <menu id="{{ menu_entry.id }}" label="{{ menu_entry.label }}">
     {% set cur_menu_entry = menu_entry %}
     {% for sub_entry in cur_menu_entry.submenu %}
     {% set menu_entry = sub_entry %}

@@ -1,5 +1,42 @@
 ---
 openbox:
+  menu_entries:
+    - label: Terminal
+      command: x-terminal-emulator
+    - label: Web Browser
+      command: x-www-browser
+    - label: Passwords
+      command: password-gorilla
+    - label: File Manager
+      command: rox
+    - label: Browsers
+      id: /Personal/Browsers
+      separator: true
+      submenu:
+        - label: Mozilla Firefox
+          command: firefox
+        - label: Chromium
+          command: chromium-browser
+        - label: Opera
+          command: opera
+        - label: Vivaldi
+          command: vivaldi
+    - label: Openbox
+      id: /Personal/Openbox
+      separator: true
+      submenu:
+        - label: Menu Editor
+          command: obmenu ~/.config/openbox/app_menu.xml
+    - label: Quit
+      separator: true
+      command: oblogout
+
+  panel:
+    shortcuts:
+      - /usr/share/applications/opera.desktop
+      - /usr/share/applications/password-gorilla.desktop
+      - /usr/share/applications/terminator.desktop
+
   device_packages: []
   rc:
     placement:
@@ -56,6 +93,7 @@ openbox:
   autostart:
     - xscreensaver -no-splash &
     - tint2 &
+    - update-menus &
     - conky &
   environment:
     lang: en_IE.UTF8
@@ -84,3 +122,5 @@ openbox:
       version: "1:1.99*"
     - name: conky
       version: "1.10*"
+    - name: menu
+      version: "2.1*"
