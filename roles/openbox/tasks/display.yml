@@ -8,4 +8,5 @@
 # 3) Can load profile on request (autorandr does this)
 # 2) Allows user to specify order of priority of profiles for user
 # 3) Loads the first matched profile in the priority list for the current user.
-# 4) Can run as daemon and be configured to autoload profiles by priority
+# 4) Can run as daemon that detects events from the X server (similar to https://bitbucket.org/portix/srandrd)
+# 5) On new/removed display events, load the first matched profile
