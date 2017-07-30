@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ "{{ item.command }}" == "$2" && "{{ item.arguments }}" == "$3" ]]
+then
+    {{ item.execute }}
+fi

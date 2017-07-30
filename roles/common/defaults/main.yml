@@ -10,32 +10,37 @@ machine:
         execute: systemctl suspend
       - name: lid_open
         event: button[ /]lid
-        command: LID open
+        template: lid
+        command: LID
+        arguments: open
         execute: systemctl resume
       - name: lid_close
         event: button[ /]lid
-        command: LID close
+        template: lid
+        command: LID
+        arguments: close
         execute: systemctl suspend
     general:
       - name: lock
         event: button[ /]screenlock
         command: SCRNLCK
-        execute: systemctl lock
+        template: run_users
+        execute: xscreensaver-command -lock
     volume:
       - name: mute
         event: button[ /]mute
         command: MUTE
-        template: pulse_sound
+        template: run_users
         execute: pactl set-sink-mute @DEFAULT_SINK@ toggle
       - name: volume_up
         event: button[ /]volumeup
         command: VOLUP
-        template: pulse_sound
+        template: run_users
         execute: pactl set-sink-volume @DEFAULT_SINK@ +10%
       - name: volume_down
         event: button[ /]volumedown
         command: VOLDN
-        template: pulse_sound
+        template: run_users
         execute: pactl set-sink-volume @DEFAULT_SINK@ -10%
     media: []
 defaults:

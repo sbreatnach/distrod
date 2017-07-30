@@ -2,9 +2,9 @@
 
 LOGGED_IN_USERS=`users | tr ' ' '\n' | uniq`
 
-function modify_sound
+function run_as_users
 {
-    # for each logged-in user, this runs the templated sound command
+    # for each logged-in user, this runs the templated command
     for USER in ${LOGGED_IN_USERS}
     do
         USER_UID=`id -u ${USER}`
@@ -13,6 +13,6 @@ function modify_sound
 }
 
 case "$2" in
-    {{ item.command }}) modify_sound ;;
+    {{ item.command }}) run_as_users ;;
     *)    logger "ACPI action undefined: $3" ;;
 esac

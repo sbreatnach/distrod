@@ -1,0 +1,11 @@
+---
+- name: install Python packages
+  pip: name=autorandr version=1.1
+
+# TODO: create a program that:
+# 1) Parses currently configured xrandr output and saves as profile (autorandr does this)
+# 2) Can detect which profiles are available currently (autorandr does this)
+# 3) Can load profile on request (autorandr does this)
+# 2) Allows user to specify order of priority of profiles for user
+# 3) Loads the first matched profile in the priority list for the current user.
+# 4) Can run as daemon and be configured to autoload profiles by priority

@@ -21,12 +21,14 @@ openbox:
           command: opera
         - label: Vivaldi
           command: vivaldi
-    - label: Openbox
-      id: /Personal/Openbox
+    - label: Configuration
+      id: /Personal/Configuration
       separator: true
       submenu:
         - label: Menu Editor
           command: obmenu ~/.config/openbox/app_menu.xml
+        - label: Displays
+          command: arandr
     - label: Quit
       separator: true
       command: oblogout
@@ -157,3 +159,5 @@ openbox:
       version: "0.1*"
     - name: nitrogen
       version: "1.5.2*"
+    - name: arandr
+      version: "0.1.9*"
