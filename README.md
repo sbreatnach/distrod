@@ -19,8 +19,6 @@ Works on Xenial:
 # TODO
 
 * Enable WiFi if needed
-* Enable laptop power management if needed
 * Theming and styling of login manager
-* Theming and styling of X session
+* Theming and styling of X session - background
 * Auto-detect and configure multiple monitors
-* Integrate fancy application launcher

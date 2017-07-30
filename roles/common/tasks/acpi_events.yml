@@ -1,0 +1,12 @@
+---
+- name: set acpi {{ acpi_events.key }} facts
+  set_fact:
+    events: "{{ acpi_events.value }}"
+
+- name: create missing ACPI {{ acpi_events.key }} events
+  template: src=acpi/event.j2 dest=/etc/acpi/events/{{ item.name }}
+  with_items: "{{ events }}"
+
+- name: create missing ACPI {{ acpi_events.key }} event scripts
+  template: src=acpi/{{ item.template|default('event') }}.sh.j2 dest=/etc/acpi/{{ item.name }}.sh mode=0755
+  with_items: "{{ events }}"

@@ -1,9 +1,7 @@
 ---
 - name: add repository keys
-  apt_key: state=present
-           {% if item.url is defined %}
-           url={{ item.url }}
-           {% endif %}
+  apt_key: state=present url={{ item.url }}
+  when: item.url is defined
   with_items: "{{ applications.repositories }}"
 
 - name: add repositories

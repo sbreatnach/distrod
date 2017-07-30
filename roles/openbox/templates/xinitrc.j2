@@ -14,9 +14,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# Screensaver and locking duties
-xscreensaver &
-
 # PolicyKit daemon for power management and other privileged actions
 # https://wiki.archlinux.org/index.php/Polkit
 /usr/lib/policykit-1/polkitd --no-debug &

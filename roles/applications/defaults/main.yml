@@ -5,6 +5,7 @@ applications:
       url: https://deb.opera.com/archive.key
     - entry: deb http://repo.vivaldi.com/stable/deb/ stable main
       url: http://repo.vivaldi.com/stable/linux_signing_key.pub
+    - entry: ppa:agornostal/ulauncher
   packages:
     - name: emacs24-nox
     - name: password-gorilla
@@ -12,5 +13,6 @@ applications:
     - name: chromium-browser
     - name: opera-stable
     - name: vivaldi-stable
+    - name: ulauncher
 
   user_packages: []

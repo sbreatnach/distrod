@@ -1,4 +1,43 @@
 ---
+machine:
+  acpi_events:
+    # all these were found with acpi_listen
+    # override these as needed depending on hardware
+    power:
+      - name: sleep_button
+        event: button[ /]sleep
+        command: SBTN
+        execute: systemctl suspend
+      - name: lid_open
+        event: button[ /]lid
+        command: LID open
+        execute: systemctl resume
+      - name: lid_close
+        event: button[ /]lid
+        command: LID close
+        execute: systemctl suspend
+    general:
+      - name: lock
+        event: button[ /]screenlock
+        command: SCRNLCK
+        execute: systemctl lock
+    volume:
+      - name: mute
+        event: button[ /]mute
+        command: MUTE
+        template: pulse_sound
+        execute: pactl set-sink-mute @DEFAULT_SINK@ toggle
+      - name: volume_up
+        event: button[ /]volumeup
+        command: VOLUP
+        template: pulse_sound
+        execute: pactl set-sink-volume @DEFAULT_SINK@ +10%
+      - name: volume_down
+        event: button[ /]volumedown
+        command: VOLDN
+        template: pulse_sound
+        execute: pactl set-sink-volume @DEFAULT_SINK@ -10%
+    media: []
 defaults:
   password: $6$6J3nXIJ4xZg7$RayRiuVr4oV20PBFkz7O9dKo0rzFeml6c2WWHGhYvV8cbikbnKr0MEDoGfQlF01ZOD/0HwsJBzO2/Iia2UVbf.
   dirs:

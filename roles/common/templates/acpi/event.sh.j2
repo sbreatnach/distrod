@@ -1,0 +1,5 @@
+#!/bin/sh
+case "$2" in
+    {{ item.command }}) systemctl suspend ;;
+    *)    logger "ACPI action undefined: $3" ;;
+esac

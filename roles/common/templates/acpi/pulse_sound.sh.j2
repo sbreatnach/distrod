@@ -1,0 +1,18 @@
+#!/bin/bash
+
+LOGGED_IN_USERS=`users | tr ' ' '\n' | uniq`
+
+function modify_sound
+{
+    # for each logged-in user, this runs the templated sound command
+    for USER in ${LOGGED_IN_USERS}
+    do
+        USER_UID=`id -u ${USER}`
+        sudo -u ${USER} XDG_RUNTIME_DIR=/run/user/${USER_UID} {{ item.execute }}
+    done
+}
+
+case "$2" in
+    {{ item.command }}) modify_sound ;;
+    *)    logger "ACPI action undefined: $3" ;;
+esac

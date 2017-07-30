@@ -32,6 +32,8 @@ openbox:
       command: oblogout
 
   panel:
+    # L: launcher, T: Taskbar, S: system tray, B: battery, C: clock
+    display_items: LTSBC
     shortcuts:
       - /usr/share/applications/opera.desktop
       - /usr/share/applications/password-gorilla.desktop
@@ -91,6 +93,7 @@ openbox:
     mouse:
       screen_edge_warp_time: 0
   autostart:
+    - xscreensaver -no-splash &
     - tint2 &
     - update-menus &
     - conky &
@@ -98,6 +101,10 @@ openbox:
     - nm-applet &
     - ibus-daemon &
     - udiskie --tray &
+    - ulauncher --hide-window &
+    - compton -b &
+  launcher:
+    hotkey: Super_L
   environment:
     lang: en_IE.UTF8
   packages:
@@ -145,3 +152,5 @@ openbox:
       version: "2.1.7*"
     - name: udiskie
       version: "1.4.9*"
+    - name: compton
+      version: "0.1*"
