@@ -10,3 +10,4 @@
 # 3) Loads the first matched profile in the priority list for the current user.
 # 4) Can run as daemon that detects events from the X server (similar to https://bitbucket.org/portix/srandrd)
 # 5) On new/removed display events, load the first matched profile
+# https://github.com/nalipaz/poll-xrandr is a script that reruns autorandr as needed. See https://unix.stackexchange.com/a/190011
