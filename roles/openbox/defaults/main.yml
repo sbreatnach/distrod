@@ -27,6 +27,8 @@ openbox:
       submenu:
         - label: Menu Editor
           command: obmenu ~/.config/openbox/app_menu.xml
+        - label: Set Desktop Background
+          command: nitrogen
         - label: Displays
           command: arandr
     - label: Quit

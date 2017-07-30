@@ -42,4 +42,5 @@ for how to create a crypted password value.
 
 # TODO
 
+* Use alternative to Nitrogen for backgrounds (crashes already!)
 * Theming and styling of login manager
