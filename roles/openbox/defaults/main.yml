@@ -93,6 +93,7 @@ openbox:
     mouse:
       screen_edge_warp_time: 0
   autostart:
+    - compton -b &
     - xscreensaver -no-splash &
     - tint2 &
     - update-menus &
@@ -101,8 +102,8 @@ openbox:
     - nm-applet &
     - ibus-daemon &
     - udiskie --tray &
+    - nitrogen --restore &
     - ulauncher --hide-window &
-    - compton -b &
   launcher:
     hotkey: Super_L
   environment:
@@ -154,3 +155,5 @@ openbox:
       version: "1.4.9*"
     - name: compton
       version: "0.1*"
+    - name: nitrogen
+      version: "1.5.2*"

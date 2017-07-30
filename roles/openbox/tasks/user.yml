@@ -10,6 +10,7 @@
     - "{{ home_dir }}/.config/openbox"
     - "{{ home_dir }}/.config/conky"
     - "{{ home_dir }}/.config/tint2"
+    - "{{ home_dir }}/.config/nitrogen"
     - "{{ home_dir }}/.config/terminator"
 
 - name: create X init script
@@ -27,5 +28,11 @@
     - { file: autostart, dir: .config/openbox }
     - { file: conky.conf, dir: .config/conky }
     - { file: tint2rc, dir: .config/tint2 }
+    - { file: nitrogen.cfg, dir: .config/nitrogen }
+    - { file: bg-saved.cfg, dir: .config/nitrogen }
     - { file: terminator_config, dir: .config/terminator, output_file: config }
     - { file: ulauncher_settings.json, dir: .config/ulauncher, output_file: settings.json }
+
+- name: copy resources
+  become_user: "{{ cur_user.username }}"
+  copy: src={{ defaults.dirs.resources }} dest={{ home_dir }}/resources

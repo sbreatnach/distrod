@@ -20,5 +20,4 @@ Works on Xenial:
 
 * Enable WiFi if needed
 * Theming and styling of login manager
-* Theming and styling of X session - background
 * Auto-detect and configure multiple monitors

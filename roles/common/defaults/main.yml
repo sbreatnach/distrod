@@ -42,6 +42,8 @@ defaults:
   password: $6$6J3nXIJ4xZg7$RayRiuVr4oV20PBFkz7O9dKo0rzFeml6c2WWHGhYvV8cbikbnKr0MEDoGfQlF01ZOD/0HwsJBzO2/Iia2UVbf.
   dirs:
     tmp: /tmp
+    # ensure any override ends with /
+    resources: resources/
     app: /usr/local/apps
 users:
   - username: vagrant
