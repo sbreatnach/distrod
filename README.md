@@ -39,8 +39,3 @@ Users can be overridden in your local vars file. For example, the following gene
 Note that the value of password is crypted in the format Ansible requires.
 See [Ansible's documentation](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for how to create a crypted password value.
-
-# TODO
-
-* Use alternative to Nitrogen for backgrounds (crashes already!)
-* Theming and styling of login manager

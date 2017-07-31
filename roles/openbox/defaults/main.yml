@@ -27,8 +27,6 @@ openbox:
       submenu:
         - label: Menu Editor
           command: obmenu ~/.config/openbox/app_menu.xml
-        - label: Set Desktop Background
-          command: nitrogen
         - label: Displays
           command: arandr
     - label: Quit
@@ -106,7 +104,7 @@ openbox:
     - nm-applet &
     - ibus-daemon &
     - udiskie --tray &
-    - nitrogen --restore &
+    - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
   launcher:
     hotkey: Super_L
@@ -159,7 +157,7 @@ openbox:
       version: "1.4.9*"
     - name: compton
       version: "0.1*"
-    - name: nitrogen
-      version: "1.5.2*"
+    - name: feh
+      version: "2.14*"
     - name: arandr
       version: "0.1.9*"
