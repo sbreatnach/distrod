@@ -11,6 +11,7 @@
     - "{{ home_dir }}/.config/conky"
     - "{{ home_dir }}/.config/tint2"
     - "{{ home_dir }}/.config/terminator"
+    - "{{ home_dir }}/.config/ulauncher"
 
 - name: create X init script
   become_user: "{{ cur_user.username }}"
