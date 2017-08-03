@@ -4,6 +4,9 @@
   with_items:
     - app
 
+- name: install ACPI if not already installed
+  apt: name=acpid
+
 - include: acpi_events.yml
   with_dict: "{{ machine.acpi_events }}"
   loop_control:

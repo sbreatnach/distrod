@@ -28,9 +28,15 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.define "ubuntu_xenial" do |ubuntu_xenial|
+    ubuntu_xenial.vm.box = "ubuntu/xenial64"
+    ubuntu_xenial.vm.provision "shell", path: "platform/debian/vm_base_provision.sh"
+  end
+
+  config.vm.define "ubuntu_zesty" do |ubuntu_zesty|
+    ubuntu_zesty.vm.box = "wholebits/ubuntu17.04-64"
+    ubuntu_zesty.vm.provision "shell", path: "platform/debian/vm_base_provision.sh"
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -89,5 +95,4 @@ Vagrant.configure(2) do |config|
   # config.push.define "atlas" do |push|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
-  config.vm.provision "shell", path: "vm_base_provision.sh"
 end

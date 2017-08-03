@@ -19,8 +19,8 @@ All Ansible role pre-requisites for DistroD should be installed initially:
 
 This project comes with a Vagrant setup to test your configuration. Running the test is easy:
 
-    vagrant up
-    ansible-playbook -b -e @vm_vars.yml -u vagrant --private-key .vagrant/machines/default/virtualbox/private_key -i vm_inventory playbook.yml
+    vagrant up ubuntu_xenial
+    ansible-playbook -b -e @platform/debian/vm_vars.yml -u vagrant --private-key .vagrant/machines/ubuntu_xenial/virtualbox/private_key -i platform/debian/vm_inventory playbook.yml
 
 # Target Configuration
 

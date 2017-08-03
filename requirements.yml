@@ -13,5 +13,3 @@
   version: 1.0.3
 - src: franklinkim.ufw
   version: 1.4.0
-- src: Stouts.python
-  version: 2.1.0

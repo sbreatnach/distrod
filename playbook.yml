@@ -8,8 +8,6 @@
       tags: [hostname]
     - role: Stouts.locale
       tags: [locale]
-    - role: Stouts.python
-      tags: [python]
     - role: ANXS.utilities
       tags: [utils]
     - role: ANXS.ntp
