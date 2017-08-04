@@ -73,3 +73,4 @@ Armed with a valid inventory and vars file, you can now run the playbook on the 
 * Add calendar display when clock is clicked
 * Integrate clipboard viewer/manager
 * Remove configuration from /etc/network/interfaces once Network Manager installed
+* Set file manager default open (xdg?)
