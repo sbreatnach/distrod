@@ -1,11 +1,15 @@
 Applications:
 
+Virtualbox
+Vagrant
 Dropbox
 Intellij IDEA
 YakYak
 Hipchat
 Opera settings
-Intellij IDEA settings
+Intellij IDEA:
+  - settings
+  - Plugins: Markdown, ini4idea, Go, Python, Cursive
 
 Investigate rambox.pro
 
