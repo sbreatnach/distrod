@@ -53,7 +53,6 @@ Note that the value of password is crypted in the format Ansible requires.
 See [Ansible's documentation](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for how to create a crypted password value.
 
-<<<<<<< HEAD
 # Playbook Running
 
 Once all configuration of the playbook and machine is done, you should be ready to run the playbook.
@@ -74,3 +73,6 @@ Armed with a valid inventory and vars file, you can now run the playbook on the 
 * Integrate clipboard viewer/manager
 * Remove configuration from /etc/network/interfaces once Network Manager installed
 * Set file manager default open (xdg?)
+* More apps: Redshift, gufw desktop shortcut
+* Dynamic monitor and resolution detection
+* Fix iBus configuration or use alternative keyboard system
