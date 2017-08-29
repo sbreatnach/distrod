@@ -70,9 +70,13 @@ Armed with a valid inventory and vars file, you can now run the playbook on the 
 # TODO
 
 * Add calendar display when clock is clicked
-* Integrate clipboard viewer/manager
+* Integrate ClipIt clipboard viewer/manager
 * Remove configuration from /etc/network/interfaces once Network Manager installed
-* Set file manager default open (xdg?)
+* Set file manager default open (xdg?) and other default links
 * More apps: Redshift, gufw desktop shortcut
 * Dynamic monitor and resolution detection
-* Fix iBus configuration or use alternative keyboard system
+* Use simpler setxkbmap calls for keyboard layouts
+** setxkbmap -model pc105 -layout gb -variant mac
+** setxkbmap -model pc105 -layout ie
+** setxkbmap -query
+* Use udev rules for linking keyboard layouts to specific hardware
