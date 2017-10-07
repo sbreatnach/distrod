@@ -6,7 +6,7 @@
 
 Works on Xenial:
 
-    sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev
+    sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev sshpass
     sudo pip install ansible==2.1.0
 
 # Ansible Configuration
@@ -71,7 +71,6 @@ Armed with a valid inventory and vars file, you can now run the playbook on the 
 
 * Add calendar display when clock is clicked
 * Integrate ClipIt clipboard viewer/manager
-* Remove configuration from /etc/network/interfaces once Network Manager installed
 * Set file manager default open (xdg?) and other default links
 * More apps: Redshift, gufw desktop shortcut
 * Dynamic monitor and resolution detection

@@ -20,6 +20,11 @@
 - name: enable network manager
   service: name=network-manager enabled=yes
 
+- name: update networking config
+  template:
+    src: network_interfaces.j2
+    dest: /etc/network/interfaces
+
 - include: user.yml
   with_items: "{{ users }}"
   loop_control:

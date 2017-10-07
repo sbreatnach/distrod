@@ -14,5 +14,7 @@ applications:
     - name: opera-stable
     - name: vivaldi-stable
     - name: ulauncher
+    - name: redshift-gtk
+    - name: clipit
 
   user_packages: []

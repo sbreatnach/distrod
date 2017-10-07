@@ -1,5 +1,8 @@
 ---
 openbox:
+  touchpad:
+    enabled: true
+    tap_to_click: false
   menu_entries:
     - label: Terminal
       command: x-terminal-emulator
@@ -102,7 +105,7 @@ openbox:
     - conky &
     - pasystray &
     - nm-applet &
-    - ibus-daemon &
+    - redshift-gtk &
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
