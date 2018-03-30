@@ -2,6 +2,11 @@
 - name: install Python packages
   pip: name=autorandr version=1.1
 
+- name: create default screenlayout
+  become_user: "{{ cur_user.username }}"
+  template: src=screenlayout.sh.j2 dest={{ home_dir }}/.screenlayout/default.sh
+            mode=0755
+
 # TODO: create a program that:
 # 1) Parses currently configured xrandr output and saves as profile (autorandr does this)
 # 2) Can detect which profiles are available currently (autorandr does this)

@@ -4,5 +4,6 @@
   with_items: "{{ proprietary.repositories }}"
 
 - name: install proprietary packages
-  apt: name={{ item.name }}={{ item.version }}* state=present
-  with_items: "{{ proprietary.packages }}"
+  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
+       state=present
+  with_items: "{{ proprietary.base_packages + proprietary.extra_packages }}"

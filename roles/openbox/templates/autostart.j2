@@ -2,6 +2,9 @@
 # These things are run when {{ cur_user.username }} Openbox X Session is started.
 #
 
+# configure monitors with defaults (if specified)
+sh ~/.screenlayout/default.sh
+
 {% for command in openbox.autostart %}
 {{ command }}
 {% endfor %}

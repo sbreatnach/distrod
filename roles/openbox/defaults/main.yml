@@ -1,5 +1,6 @@
 ---
 openbox:
+  xrandr_configuration: ""
   touchpad:
     enabled: true
     tap_to_click: false
@@ -109,8 +110,9 @@ openbox:
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
+    - clipit &
   launcher:
-    hotkey: "<Primary><Alt>Space"
+    hotkey: "<Primary><Alt>space"
   environment:
     lang: en_IE.UTF8
   packages:
@@ -120,6 +122,8 @@ openbox:
       version: 7.7
     - name: pulseaudio
       version: "1:8.0"
+    - name: pavucontrol
+      version: "3.0*"
     - name: openbox
       version: 3.6.1
     - name: obconf
@@ -166,3 +170,5 @@ openbox:
       version: "2.14*"
     - name: arandr
       version: "0.1.9*"
+    - name: xcal
+      version: "4.1*"
