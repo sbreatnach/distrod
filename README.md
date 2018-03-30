@@ -6,7 +6,7 @@
 
 Works on Xenial:
 
-    sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev
+    sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev sshpass
     sudo pip install ansible==2.1.0
 
 # Ansible Configuration
@@ -53,7 +53,6 @@ Note that the value of password is crypted in the format Ansible requires.
 See [Ansible's documentation](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for how to create a crypted password value.
 
-<<<<<<< HEAD
 # Playbook Running
 
 Once all configuration of the playbook and machine is done, you should be ready to run the playbook.
@@ -71,4 +70,12 @@ Armed with a valid inventory and vars file, you can now run the playbook on the 
 # TODO
 
 * Add calendar display when clock is clicked
-* Integrate clipboard viewer/manager
+* Integrate ClipIt clipboard viewer/manager
+* Set file manager default open (xdg?) and other default links
+* More apps: Redshift, gufw desktop shortcut
+* Dynamic monitor and resolution detection
+* Use simpler setxkbmap calls for keyboard layouts
+** setxkbmap -model pc105 -layout gb -variant mac
+** setxkbmap -model pc105 -layout ie
+** setxkbmap -query
+* Use udev rules for linking keyboard layouts to specific hardware
