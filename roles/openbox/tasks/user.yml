@@ -30,6 +30,7 @@
     - { file: tint2rc, dir: .config/tint2 }
     - { file: terminator_config, dir: .config/terminator, output_file: config }
     - { file: ulauncher_settings.json, dir: .config/ulauncher, output_file: settings.json }
+    - { file: carillon.yml, dir: .config/carillon, output_file: default.yml }
 
 - name: copy resources
   become_user: "{{ cur_user.username }}"

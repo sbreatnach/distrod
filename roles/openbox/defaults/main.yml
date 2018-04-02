@@ -1,6 +1,20 @@
 ---
 openbox:
   xrandr_configuration: ""
+  keyboard:
+    selected: en_mac_ie
+    layouts:
+      en_mac_ie:
+        name: English Mac (IE)
+        icon: ie.png
+        variant: mac
+        model: pc105
+        layout: gb
+      en_us:
+        name: English (US)
+        icon: us.png
+        model: pc105
+        layout: us
   touchpad:
     enabled: true
     tap_to_click: false
@@ -111,10 +125,14 @@ openbox:
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
     - clipit &
+    - carillon &
   launcher:
     hotkey: "<Primary><Alt>space"
   environment:
     lang: en_IE.UTF8
+  pip_packages:
+    - name: carillon
+      version: "1.0.2"
   packages:
     - name: xorg
       version: "1:7.7"

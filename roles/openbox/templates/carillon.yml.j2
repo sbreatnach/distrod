@@ -1,0 +1,7 @@
+---
+keyboards:
+  {% for key, data in openbox.keyboard.layouts.items() %}
+  {{ key }}: {{ data|to_yaml }}
+  {% endfor %}
+
+selected: {{ openbox.keyboard.selected }}

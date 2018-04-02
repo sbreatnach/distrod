@@ -9,6 +9,10 @@
        state=present
   with_items: "{{ openbox.device_packages }}"
 
+- name: install python packages
+  pip: name={{ item.name }} version={{ item.version }} state=present
+  with_items: "{{ openbox.pip_packages }}"
+
 - name: create openbox scripts
   template: src={{ item }}.j2 dest=/usr/bin/{{ item }} mode=0755
   with_items:
