@@ -7,7 +7,6 @@ applications:
       url: http://repo.vivaldi.com/stable/linux_signing_key.pub
     - entry: ppa:agornostal/ulauncher
   packages:
-    - name: emacs24-nox
     - name: password-gorilla
     - name: firefox
     - name: chromium-browser

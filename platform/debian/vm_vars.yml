@@ -4,6 +4,10 @@ ufw_rules:
     rule: allow
   - port: 22
     rule: allow
+  - port: 443
+    rule: allow
+  - port: 8443
+    rule: allow
   - port: 2222
     rule: allow
   - from_ip: 127.0.0.1/8

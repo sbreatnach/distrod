@@ -1,4 +1,8 @@
 ---
+- name: install base packages
+  apt: name={{ item }} state=present
+  with_items: "{{ openbox.base_packages }}"
+
 - name: install packages
   apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
        state=present
@@ -10,7 +14,7 @@
   with_items: "{{ openbox.device_packages }}"
 
 - name: install python packages
-  pip: name={{ item.name }} version={{ item.version }} state=present
+  pip: "{{ item }}"
   with_items: "{{ openbox.pip_packages }}"
 
 - name: create openbox scripts
