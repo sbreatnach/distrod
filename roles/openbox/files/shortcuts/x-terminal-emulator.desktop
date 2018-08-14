@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Terminal Emulator
+Comment=Use the command line
+TryExec=x-terminal-emulator
+Exec=x-terminal-emulator
+Icon=urxvt_48x48.xpm
+Type=Application
+Categories=Utility;TerminalEmulator;
+StartupNotify=true
+Keywords=Run;
+Actions=New

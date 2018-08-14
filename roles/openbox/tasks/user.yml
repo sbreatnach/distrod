@@ -22,6 +22,8 @@
   become_user: "{{ cur_user.username }}"
   template: src={{ item.file }}.j2 dest={{ home_dir }}/{{ item.dir }}/{{ item.output_file|default(item.file) }}
   with_items:
+    - { file: xresources, dir: ".", output_file: .Xresources }
+    - { file: xscreensaver, dir: ".", output_file: .xscreensaver }
     - { file: rc.xml, dir: .config/openbox }
     - { file: environment, dir: .config/openbox }
     - { file: menu.xml, dir: .config/openbox }
@@ -36,3 +38,8 @@
 - name: copy resources
   become_user: "{{ cur_user.username }}"
   copy: src={{ defaults.dirs.resources }} dest={{ home_dir }}/resources
+
+- name: set default applications
+  become_user: "{{ cur_user.username }}"
+  shell: xdg-mime default {{ item.application }} {{ item.mimetypes|quote }}
+  with_items: "{{ openbox.default_applications }}"

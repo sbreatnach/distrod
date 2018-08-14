@@ -17,6 +17,12 @@
   pip: "{{ item }}"
   with_items: "{{ openbox.pip_packages }}"
 
+- name: copy static files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ openbox.static_files }}"
+
 - name: create openbox scripts
   template: src={{ item }}.j2 dest=/usr/bin/{{ item }} mode=0755
   with_items:
@@ -24,6 +30,10 @@
 
 - name: create Debian menu
   shell: update-menus
+
+- name: set alternatives
+  shell: update-alternatives --set {{ item.command }} {{ item.executable }}
+  with_items: "{{ openbox.alternatives }}"
 
 - name: enable network manager
   service: name=network-manager enabled=yes

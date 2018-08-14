@@ -1,0 +1,71 @@
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.autohint:   false
+Xft.lcdfilter:  lcddefault
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=18
+URxvt.geometry: 80x36
+URxvt.saveLines: 65535
+URxvt.scrollBar_right: True
+URxvt.scrollstyle: next
+URxvt.keysym.M-s: searchable-scrollback:start
+
+! Colors
+URxvt*background: #000000
+URxvt*foreground: #00FF00
+! black
+URxvt*color0:  #000000
+URxvt*color8:  #686868
+! red
+URxvt*color1:  #B21818
+URxvt*color9:  #FF5454
+! green
+URxvt*color2:  #18B218
+URxvt*color10: #54FF54
+! yellow
+URxvt*color3:  #B26818
+URxvt*color11: #FFFF54
+! blue
+URxvt*color4:  #1818B2
+URxvt*color12: #5454FF
+! purple
+URxvt*color5:  #B218B2
+URxvt*color13: #FF54FF
+! cyan
+URxvt*color6:  #18B2B2
+URxvt*color14: #54FFFF
+! white
+URxvt*color7:  #B2B2B2
+URxvt*color15: #FFFFFF
+
+!-*- Perl extensions -*-
+URxvt.perl-ext-common: default,selection-to-clipboard,matcher,keyboard-select,searchable-scrollback,clipboard-osc,selection,tabbed
+URxvt.url-launcher:   /usr/bin/x-www-browser
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+
+! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
+! Disable Ctrl-Alt-c & Ctrl-Alt-v bindings (optional)
+URxvt.keysym.C-M-c:    builtin-string:
+URxvt.keysym.C-M-v:    builtin-string:
+
+! Bind Ctrl-Shift-c & Ctrl-Shift-v to copy and paste
+! I dont know why, but I needed to use hex keysym values to get it to work
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard

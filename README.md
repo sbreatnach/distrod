@@ -23,6 +23,13 @@ test is easy:
     vagrant up ubuntu_xenial
     ansible-playbook -b -e @platform/debian/vm_vars.yml -u vagrant --private-key .vagrant/machines/ubuntu_xenial/virtualbox/private_key -i platform/debian/vm_inventory playbook.yml
 
+An Ubuntu Bionic configuration is available also:
+
+    vagrant up ubuntu_bionic
+    ansible-playbook -b -e @platform/ubuntu_bionic/vars.yml -u vagrant \
+        --private-key .vagrant/machines/ubuntu_bionic/virtualbox/private_key \
+        -i platform/debian/vm_inventory playbook.yml
+
 # Target Configuration
 
 Ubuntu Server 16.04 LTS is the known tested distro, though others may be
@@ -87,7 +94,6 @@ testbed_vars.yml and testbed_inventory:
 # TODO
 
 * Set file manager default open (xdg?) and other default links
-* More apps: gufw desktop shortcut
 * Dynamic monitor and resolution detection
 * Configure + integrate carillon for keyboard layout choosing
 * Integrate decent volume control

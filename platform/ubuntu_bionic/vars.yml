@@ -12,6 +12,19 @@ ufw_rules:
   - from_ip: 127.0.0.1/8
     rule: allow
 openbox:
+  autostart:
+  - compton -b &
+  - xscreensaver -no-splash &
+  - tint2 &
+  - update-menus &
+  - conky &
+  - nm-applet &
+  - redshift-gtk &
+  - udiskie --tray &
+  - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
+  - ulauncher --hide-window &
+  - clipit &
+  - carillon &
   packages:
     - name: emacs25-nox
     - name: xorg
