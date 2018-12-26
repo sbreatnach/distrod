@@ -98,3 +98,6 @@ testbed_vars.yml and testbed_inventory:
 * Configure + integrate carillon for keyboard layout choosing
 * Integrate decent volume control
 * Better default menu with arandr
+* Configure fstab based on partitions specified
+* Use systemd for daemons to enable automatic restarting on crashes
+* VNC server

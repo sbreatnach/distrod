@@ -12,7 +12,7 @@ openbox:
     - application: geany.desktop
       mimetypes: text/plain
   keyboard:
-    selected: en_mac_ie
+    selected: en_gb
     layouts:
       en_gb:
         name: English (GB)
@@ -42,20 +42,14 @@ openbox:
       command: password-gorilla
     - label: File Manager
       command: rox
-    - label: Browsers
-      id: /Personal/Browsers
+    - id: /Personal
       separator: true
-      submenu:
-        - label: Mozilla Firefox
-          command: firefox
-        - label: Chromium
-          command: chromium-browser
-        - label: Opera
-          command: opera
-        - label: Vivaldi
-          command: vivaldi
+    - id: /Debian
+      separator: true
+    - id: client-list-menu
+      separator: true
     - label: Configuration
-      id: /Personal/Configuration
+      id: /Openbox/Configuration
       separator: true
       submenu:
         - label: Menu Editor
@@ -125,6 +119,9 @@ openbox:
         name: MoveResizeTo
         x: center
         y: center
+      - key: C-A-m
+        name: OpenMenu
+        menu: root-menu
     mouse:
       screen_edge_warp_time: 0
   autostart:
@@ -163,6 +160,8 @@ openbox:
     dest: /usr/share/applications/x-www-browser.desktop
   - src: shortcuts/x-terminal-emulator.desktop
     dest: /usr/share/applications/x-terminal-emulator.desktop
+  - src: shortcuts/tint2-menu.desktop
+    dest: /usr/share/applications/tint2-menu.desktop
   packages:
     - name: emacs24-nox
     - name: xorg
@@ -217,3 +216,5 @@ openbox:
       version: "0.1*"
     - name: xcal
       version: "4.1*"
+    - name: gksudo
+      version: "2.0*"

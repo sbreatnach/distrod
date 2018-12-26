@@ -1,13 +1,13 @@
 # Lenovo Thinkpad T450s
 
-# Hardware Issues
+## Hardware Issues
 
 All hardware detected correctly. Wireless network card causes issues. Steps taken:
 
     echo 'options iwlwifi 11ndisable=1' | sudo tee -a /etc/modprobe.d/iwlwifi.conf
     sudo apt install intel-microcode
 
-# Hardware Introspection
+## Hardware Introspection
 
     lspci -v
 

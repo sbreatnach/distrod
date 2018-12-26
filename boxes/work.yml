@@ -4,10 +4,9 @@ Virtualbox
 Vagrant
 Dropbox
 Intellij IDEA
-Pidgin
-Slack
-Browser settings
-Emacs settings
+YakYak
+Hipchat
+Opera settings
 Intellij IDEA:
   - settings
   - Plugins: Markdown, ini4idea, Go, Python, Cursive

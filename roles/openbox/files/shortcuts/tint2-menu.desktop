@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Open Menu
+Comment=Opens the Openbox menu
+TryExec=xdotool key ctrl+alt+m
+Exec=xdotool key ctrl+alt+m
+Icon=face-monkey
+Type=Application
+Categories=Utility;
+Keywords=Run;
+Actions=New

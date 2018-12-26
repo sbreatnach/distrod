@@ -12,3 +12,4 @@ openbox:
 proprietary:
   extra_packages:
     - name: nvidia-current
+    - name: nvidia-driver-390
