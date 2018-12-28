@@ -1,16 +1,3 @@
-Applications:
-
-Dropbox
-Intellij IDEA
-
-System Configuration:
-
-Mac OS X key bindings for
-Terminator
-Intellij IDEA
-All browsers
-Openbox
-
 ###
 Taken from the ever-excellent ArchLinux wiki - https://wiki.archlinux.org/index.php/MacBookPro8,1/8,2/8,3_%282011%29
 ###

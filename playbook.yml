@@ -14,8 +14,6 @@
       tags: [ntp]
     - role: ANXS.build-essential
       tags: [utils]
-    - role: clojure
-      tags: [clojure]
     - role: franklinkim.ufw
       tags: [firewall]
     - role: proprietary

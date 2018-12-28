@@ -42,20 +42,24 @@ openbox:
       command: password-gorilla
     - label: File Manager
       command: rox
-    - id: /Personal
-      separator: true
     - id: /Debian
+      link: true
       separator: true
     - id: client-list-menu
+      link: true
       separator: true
     - label: Configuration
       id: /Openbox/Configuration
       separator: true
       submenu:
+        - label: Configure
+          command: obconf
         - label: Menu Editor
-          command: obmenu ~/.config/openbox/app_menu.xml
+          command: obmenu ~/.config/openbox/menu.xml
         - label: Displays
           command: arandr
+        - label: Reconfigure
+          action_name: Reconfigure
     - label: Quit
       separator: true
       command: oblogout
@@ -64,6 +68,7 @@ openbox:
     # L: launcher, T: Taskbar, S: system tray, B: battery, C: clock
     display_items: LTSBC
     shortcuts:
+      - /usr/share/applications/tint2-menu.desktop
       - /usr/share/applications/x-www-browser.desktop
       - /usr/share/applications/password-gorilla.desktop
       - /usr/share/applications/x-terminal-emulator.desktop
@@ -120,7 +125,7 @@ openbox:
         x: center
         y: center
       - key: C-A-m
-        name: OpenMenu
+        name: ShowMenu
         menu: root-menu
     mouse:
       screen_edge_warp_time: 0
@@ -130,7 +135,6 @@ openbox:
     - tint2 &
     - update-menus &
     - conky &
-    - pasystray &
     - nm-applet &
     - redshift-gtk &
     - udiskie --tray &
@@ -163,13 +167,13 @@ openbox:
   - src: shortcuts/tint2-menu.desktop
     dest: /usr/share/applications/tint2-menu.desktop
   packages:
-    - name: emacs24-nox
+    - name: emacs25-nox
     - name: xorg
-      version: "1:7.7"
+      version: "1:7.7*"
     - name: x11-xserver-utils
       version: "7.7*"
     - name: pulseaudio
-      version: "1:8.0*"
+      version: "1:11.1*"
     - name: pavucontrol
       version: "3.0*"
     - name: openbox
@@ -179,11 +183,11 @@ openbox:
     - name: obmenu
       version: "1.0*"
     - name: tint2
-      version: "0.12*"
+      version: "16.2*"
     - name: xscreensaver
-      version: "5.34*"
+      version: "5.36*"
     - name: rxvt-unicode
-      version: "9*"
+      version: "9.22*"
     - name: scrot
       version: "0.8*"
     - name: rox-filer
@@ -199,19 +203,19 @@ openbox:
     - name: libnotify-bin
       version: "0.7*"
     - name: pasystray
-      version: "0.4*"
+      version: "0.6*"
     - name: network-manager
-      version: "1.2*"
+      version: "1.10*"
     - name: network-manager-gnome
-      version: "1.2*"
+      version: "1.8*"
     - name: udisks2
-      version: "2.1*"
+      version: "2.7*"
     - name: udiskie
-      version: "1.4*"
+      version: "1.7*"
     - name: compton
       version: "0.1*"
     - name: feh
-      version: "2.14*"
+      version: "2.23*"
     - name: arandr
       version: "0.1*"
     - name: xcal

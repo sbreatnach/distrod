@@ -23,12 +23,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "ubuntu_bionic" do |ubuntu_bionic|
     ubuntu_bionic.vm.box = "generic/ubuntu1804"
-    ubuntu_bionic.vm.provision "shell", path: "platform/debian/vm_base_provision.sh"
-  end
-
-  config.vm.define "ubuntu_xenial" do |ubuntu_xenial|
-    ubuntu_xenial.vm.box = "generic/ubuntu1604"
-    ubuntu_xenial.vm.provision "shell", path: "platform/debian/vm_base_provision.sh"
+    ubuntu_bionic.vm.provision "shell", path: "vm_base_provision.sh"
   end
 
   # SSH access over local host port
@@ -40,7 +35,6 @@ Vagrant.configure(2) do |config|
     vb.memory = "2048"
     vb.cpus = 2
     vb.customize ["modifyvm", :id,
-                  "--monitorcount", "3",
                   "--vram", "64",
                   "--usb", "on"]
     if OS.linux? then

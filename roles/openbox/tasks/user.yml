@@ -10,7 +10,6 @@
     - "{{ home_dir }}/.config/openbox"
     - "{{ home_dir }}/.config/conky"
     - "{{ home_dir }}/.config/tint2"
-    - "{{ home_dir }}/.config/terminator"
     - "{{ home_dir }}/.config/ulauncher"
     - "{{ home_dir }}/.config/carillon"
 
@@ -27,11 +26,9 @@
     - { file: rc.xml, dir: .config/openbox }
     - { file: environment, dir: .config/openbox }
     - { file: menu.xml, dir: .config/openbox }
-    - { file: app_menu.xml, dir: .config/openbox }
     - { file: autostart, dir: .config/openbox }
     - { file: conky.conf, dir: .config/conky }
     - { file: tint2rc, dir: .config/tint2 }
-    - { file: terminator_config, dir: .config/terminator, output_file: config }
     - { file: ulauncher_settings.json, dir: .config/ulauncher, output_file: settings.json }
     - { file: carillon.yml, dir: .config/carillon, output_file: default.yml }
 

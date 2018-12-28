@@ -6,40 +6,10 @@
                 file:///usr/share/openbox/menu.xsd">
 
 <menu id="root-menu" label="Openbox 3">
-  <item label="Terminal emulator">
-    <action name="Execute"><execute>x-terminal-emulator</execute></action>
-  </item>
-  <item label="Web browser">
-    <action name="Execute"><execute>x-www-browser</execute></action>
-  </item>
-  <!-- This requires the presence of the 'menu' package to work -->
-  <menu id="/Personal" />
-  <separator />
-  <menu id="/Debian" />
-  <separator />
-  <menu id="client-list-menu" />
-  <separator />
-  <menu id="/Openbox" label="Openbox">
-    <item label="Configuration">
-      <action name="Execute"><execute>obconf</execute></action>
-    </item>
-    <item label="Menu Editor">
-      <action name="Execute"><execute>obmenu</execute></action>
-    </item>
-    <item label="Reconfigure">
-      <action name="Reconfigure" />
-    </item>
-    <item label="Restart">
-      <action name="Restart" />
-    </item>
-    <item label="Exit">
-      <action name="Exit" />
-    </item>
-  </menu>
-  <separator />
-  <item label="Logout">
-    <action name="Execute"><execute>oblogout</execute></action>
-  </item>
+  {% for entry in openbox.menu_entries %}
+  {% set menu_entry = entry %}
+  {% include "app_menu_item.xml.j2" %}
+  {% endfor %}
 </menu>
 
 </openbox_menu>

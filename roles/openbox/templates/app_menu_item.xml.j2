@@ -2,8 +2,12 @@
   {% if menu_entry.separator is defined %}
   <separator />
   {% endif %}
-  {% if menu_entry.submenu is defined %}
-  <menu id="{{ menu_entry.id }}" label="{{ menu_entry.label }}">
+  {% if menu_entry.link|default(false) %}
+  <menu id="{{ menu_entry.id }}" />
+
+  {% elif menu_entry.submenu is defined %}
+  <menu id="{{ menu_entry.id }}"
+        {% if menu_entry.label is defined %}label="{{ menu_entry.label }}"{% endif %}>
     {% set cur_menu_entry = menu_entry %}
     {% for sub_entry in cur_menu_entry.submenu %}
     {% set menu_entry = sub_entry %}
@@ -11,8 +15,13 @@
     {% endfor %}
     {% set menu_entry = cur_menu_entry %}
   </menu>
+
   {% else %}
-  <item label="{{ menu_entry.label }}">
-    <action name="Execute"><execute>{{ menu_entry.command }}</execute></action>
+  <item label="{{ menu_entry.label|default('') }}">
+    <action name="{{ menu_entry.action_name|default('Execute') }}">
+      {% if menu_entry.command is defined %}
+      <execute>{{ menu_entry.command }}</execute>
+      {% endif %}
+    </action>
   </item>
   {% endif %}
