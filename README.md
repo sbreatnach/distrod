@@ -1,4 +1,10 @@
+# DistroD
 
+# Overview + Philosophy
+
+My own homebrewed Ansible playbooks for provisioning a **usable**, **ultra stable** Linux installation. My goals with this are, above all, completely predictability and stability. Hence, using Openbox as the window manager and avoiding, where possible, extra layers of "user-friendliness". I have experienced enough issues with systems like iBus and GNOME Shell where some shoddy bug ruins my day. Instead I aimed for using the lowest-level, most stable systems.
+
+This installation is unashamedly for me, though it's possible other people might find it useful. All the configurations and applications chosen are for a software developer who works in the terminal and wants the OS to get out of my way. It's stripped down to the near-bare-bones but has some modern niceties, like a fancy application launcher, automatic USB drive mounting, night light etc.
 
 # Install
 
@@ -20,20 +26,22 @@ All Ansible role pre-requisites for DistroD should be installed initially:
 This project comes with a Vagrant setup to test your configuration. Running the
 test is easy:
 
-    vagrant up ubuntu_xenial
-    ansible-playbook -b -e @platform/debian/vm_vars.yml -u vagrant --private-key .vagrant/machines/ubuntu_xenial/virtualbox/private_key -i platform/debian/vm_inventory playbook.yml
-
-An Ubuntu Bionic configuration is available also:
-
-    vagrant up ubuntu_bionic
-    ansible-playbook -b -e @platform/ubuntu_bionic/vars.yml -u vagrant \
+    vagrant up
+    ansible-playbook -b -u vagrant -i vm_inventory \
         --private-key .vagrant/machines/ubuntu_bionic/virtualbox/private_key \
-        -i platform/debian/vm_inventory playbook.yml
+        playbook.yml
+
+Running the tests in Windows is slightly more involved. The IP address assigned to the VM by HyperV is dynamic so the hyperv_inventory file must be generated manually. Use vm_inventory as a template:
+
+    vagrant up
+    ansible-playbook -b -u vagrant -i hyperv_inventory \
+        --private-key .vagrant/machines/ubuntu_bionic/hyperv/private_key \
+        playbook.yml
 
 # Target Configuration
 
-Ubuntu Server 16.04 LTS is the known tested distro, though others may be
-supported without any changes.
+Ubuntu Server 18.04 LTS is the known tested distro, though others may be
+work without any changes.
 Before running the playbook, ensure you can SSH to the target machine
 beforehand. For example:
 
@@ -47,8 +55,7 @@ The bare minimum your target machine must have is Python:
 
 There are a number of hook points in the Ansible roles that are designed to be
 configurable. These should be overridden using the standard Ansible approach of
-specifying extra variable files. For example, note that the ansible-playbook
-command above for Vagrant testing includes vm_vars.yml.
+specifying extra variable files. The following describes the most important configuration options.
 
 ## User
 
@@ -95,9 +102,6 @@ testbed_vars.yml and testbed_inventory:
 
 * Set file manager default open (xdg?) and other default links
 * Dynamic monitor and resolution detection
-* Configure + integrate carillon for keyboard layout choosing
-* Integrate decent volume control
-* Better default menu with arandr
 * Configure fstab based on partitions specified
 * Use systemd for daemons to enable automatic restarting on crashes
 * VNC server
