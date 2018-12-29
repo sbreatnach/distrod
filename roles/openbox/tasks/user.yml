@@ -12,10 +12,24 @@
     - "{{ home_dir }}/.config/tint2"
     - "{{ home_dir }}/.config/ulauncher"
     - "{{ home_dir }}/.config/carillon"
+    - "{{ home_dir }}/.config/rox.sourceforge.net/MIME-types"
 
 - name: create X init script
   become_user: "{{ cur_user.username }}"
   template: src=xinitrc.j2 dest={{ home_dir }}/.xinitrc mode=0744
+
+- name: create ROX filer associations
+  become_user: "{{ cur_user.username }}"
+  template: src=rox_handler.sh.j2
+            dest={{ home_dir }}/.config/rox.sourceforge.net/MIME-types/{{ item.output_file }}
+            mode=0755
+  with_items:
+    - { command: feh, output_file: image_jpeg }
+    - { command: feh, output_file: image_png }
+    - { command: x-www-browser, output_file: text_html }
+    - { command: x-www-browser, output_file: application_pdf }
+    - { command: geany, output_file: text_plain }
+    - { command: geany, output_file: application_json }
 
 - name: create config files
   become_user: "{{ cur_user.username }}"
@@ -35,8 +49,3 @@
 - name: copy resources
   become_user: "{{ cur_user.username }}"
   copy: src={{ defaults.dirs.resources }} dest={{ home_dir }}/resources
-
-- name: set default applications
-  become_user: "{{ cur_user.username }}"
-  shell: xdg-mime default {{ item.application }} {{ item.mimetypes|quote }}
-  with_items: "{{ openbox.default_applications }}"

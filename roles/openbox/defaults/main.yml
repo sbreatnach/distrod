@@ -4,13 +4,6 @@ openbox:
   alternatives:
     - command: x-terminal-emulator
       executable: /usr/bin/urxvt
-  default_applications:
-    - application: x-www-browser.desktop
-      mimetypes: text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https
-    - application: feh.desktop
-      mimetypes: image/png;image/jpeg
-    - application: geany.desktop
-      mimetypes: text/plain
   keyboard:
     selected: en_gb
     layouts:
@@ -158,6 +151,8 @@ openbox:
   static_files:
   - src: sudo.conf
     dest: /etc/sudo.conf
+  - src: mimeapps.list
+    dest: /usr/share/applications/mimeapps.list
   - src: shortcuts/gufw.desktop
     dest: /usr/share/applications/gufw.desktop
   - src: shortcuts/x-www-browser.desktop
@@ -166,6 +161,8 @@ openbox:
     dest: /usr/share/applications/x-terminal-emulator.desktop
   - src: shortcuts/tint2-menu.desktop
     dest: /usr/share/applications/tint2-menu.desktop
+  - src: shortcuts/rox-filer.desktop
+    dest: /usr/share/applications/rox-filer.desktop
   packages:
     - name: emacs25-nox
     - name: xorg
@@ -220,5 +217,3 @@ openbox:
       version: "0.1*"
     - name: xcal
       version: "4.1*"
-    - name: gksudo
-      version: "2.0*"
