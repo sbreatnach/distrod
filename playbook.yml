@@ -14,7 +14,7 @@
       tags: [ntp]
     - role: ANXS.build-essential
       tags: [utils]
-    - role: franklinkim.ufw
+    - role: weareinteractive.ufw
       tags: [firewall]
     - role: proprietary
       tags: [proprietary]

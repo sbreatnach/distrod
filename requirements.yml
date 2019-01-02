@@ -3,13 +3,13 @@
   version: v1.0.7
 - src: ANXS.ntp
   version: v1.1.0
+- src: ANXS.apt
+  version: v2.0.0
 - src: ANXS.hostname
-  version: v1.1.0
-- src: git+https://github.com/Zeto-Ltd/clojure.git
   version: v1.1.0
 - src: ANXS.build-essential
   version: v1.0.2
 - src: Stouts.locale
   version: 1.1.0
-- src: franklinkim.ufw
+- src: weareinteractive.ufw
   version: 1.7.1

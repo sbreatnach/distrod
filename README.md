@@ -19,7 +19,7 @@ Works on Xenial:
 
 All Ansible role pre-requisites for DistroD should be installed initially:
 
-    sudo ansible-galaxy install -r requirements.yml
+    ansible-galaxy install -r requirements.yml
 
 # Vagrant Testing
 
