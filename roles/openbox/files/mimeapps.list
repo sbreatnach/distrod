@@ -1,0 +1,8 @@
+[Default Applications]
+inode/directory=rox-filer.desktop
+image/jpeg=feh.desktop
+image/png=feh.desktop
+application/pdf=x-www-browser.desktop
+text/html=x-www-browser.desktop
+text/plain=geany.desktop
+application/json=geany.desktop

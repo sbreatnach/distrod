@@ -100,7 +100,6 @@ testbed_vars.yml and testbed_inventory:
 
 # TODO
 
-* Set file manager default open (xdg?) and other default links
 * Dynamic monitor and resolution detection
 * Configure fstab based on partitions specified
 * Use systemd for daemons to enable automatic restarting on crashes
