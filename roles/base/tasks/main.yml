@@ -11,3 +11,6 @@
 
 - name: enable sudo access for appropriate users
   template: src=sudoers.j2 dest=/etc/sudoers.d/users
+
+- name: update environment with extra paths
+  template: src=environment.j2 dest=/etc/environment

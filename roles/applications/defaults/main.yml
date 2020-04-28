@@ -12,8 +12,8 @@ applications:
     - name: geany
   snaps:
     - name: bitwarden
-      desktop_source: /snap/bitwarden/current/meta/gui/bitwarden.desktop
+      desktop_source: /var/lib/snapd/desktop/applications/bitwarden_bitwarden.desktop
     - name: chromium
-      desktop_source: /snap/chromium/current/meta/gui/chromium.desktop
+      desktop_source: /var/lib/snapd/desktop/applications/chromium_chromium.desktop
 
   user_packages: []

@@ -1,5 +1,7 @@
 ---
 base:
+  extra_paths:
+    - /snap/bin
   packages:
     - name: git
     - name: python3-pip
