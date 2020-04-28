@@ -1,8 +1,5 @@
 ---
 proprietary:
-  repositories:
-    - ppa:flexiondotorg/hal-flash
-  base_packages:
-    - name: libhal1-flash
-      version: 0.3
+  repositories: []
+  base_packages: []
   extra_packages: []

@@ -2,5 +2,5 @@
 base:
   packages:
     - name: git
-    - name: python-pip
+    - name: python3-pip
     - name: openjdk-8-jdk

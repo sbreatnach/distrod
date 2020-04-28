@@ -2,9 +2,19 @@
 
 # Overview + Philosophy
 
-My own homebrewed Ansible playbooks for provisioning a **usable**, **ultra stable** Linux installation. My goals with this are, above all, completely predictability and stability. Hence, using Openbox as the window manager and avoiding, where possible, extra layers of "user-friendliness". I have experienced enough issues with systems like iBus and GNOME Shell where some shoddy bug ruins my day. Instead I aimed for using the lowest-level, most stable systems.
+My own homebrewed Ansible playbooks for provisioning a **usable**,
+**ultra stable** Linux installation. My goals with this are, above all,
+completely predictability and stability. Hence, using Openbox as the window
+manager and avoiding, where possible, extra layers of "user-friendliness". I
+have experienced enough issues with systems like iBus and GNOME Shell where
+some shoddy bug ruins my day. Instead I aimed for using the lowest-level, most
+stable systems.
 
-This installation is unashamedly for me, though it's possible other people might find it useful. All the configurations and applications chosen are for a software developer who works in the terminal and wants the OS to get out of my way. It's stripped down to the near-bare-bones but has some modern niceties, like a fancy application launcher, automatic USB drive mounting, night light etc.
+This installation is unashamedly for me, though it's possible other people
+might find it useful. All the configurations and applications chosen are for a
+software developer who works in the terminal and wants the OS to get out of my
+way. It's stripped down to the near-bare-bones but has some modern niceties,
+like a fancy application launcher, automatic USB drive mounting, night light etc.
 
 # Install
 
@@ -12,8 +22,8 @@ This installation is unashamedly for me, though it's possible other people might
 
 Works on Xenial:
 
-    sudo apt-get install vagrant virtualbox python-pip libffi-dev libssl-dev sshpass
-    sudo pip install ansible==2.5.0
+    sudo apt-get install vagrant virtualbox python3-pip libffi-dev libssl-dev sshpass
+    sudo pip3 install ansible>=2.9.7
 
 # Ansible Configuration
 
@@ -40,16 +50,15 @@ Running the tests in Windows is slightly more involved. The IP address assigned 
 
 # Target Configuration
 
-Ubuntu Server 18.04 LTS is the known tested distro, though others may be
-work without any changes.
+**Ubuntu Server 20.04 LTS** is the targeted base distro.
 Before running the playbook, ensure you can SSH to the target machine
 beforehand. For example:
 
     ssh 192.168.2.4
 
-The bare minimum your target machine must have is Python:
+The bare minimum your target machine must have is Python3:
 
-    sudo apt install python
+    sudo apt install python3
 
 # Playbook Configuration
 
@@ -75,6 +84,16 @@ generates a single user named Max Power:
 Note that the value of password is crypted in the format Ansible requires.
 See [Ansible's documentation](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for how to create a crypted password value.
+
+## Device Packages
+
+Any packages that are required for your hardware can be set with this variable.
+For example, installing Broadcom and AMD-specific packages:
+
+    openbox:
+      device_packages:
+        - firmware-b43-installer
+        - amd64-microcode
 
 # Playbook Running
 

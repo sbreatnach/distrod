@@ -2,6 +2,7 @@
 - name: install {{ item.name|default('') }}
   apt: state=present
        name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
+       install_recommends={{ item.install_recommends|default(true) }}
   when: item.name is defined
 
 - name: get url {{ item.url|default('') }}

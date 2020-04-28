@@ -1,17 +1,10 @@
 ---
 - name: install base packages
-  apt: name={{ item }} state=present
-  with_items: "{{ openbox.base_packages }}"
-
-- name: install packages
-  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
-       state=present
-  with_items: "{{ openbox.packages }}"
+  apt: name={{ openbox.base_packages }} state=present
 
 - name: install device packages
-  apt: name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
+  apt: name={{ openbox.device_packages }}
        state=present
-  with_items: "{{ openbox.device_packages }}"
 
 - name: install python packages
   pip: "{{ item }}"
@@ -35,8 +28,8 @@
   shell: update-alternatives --set {{ item.command }} {{ item.executable }}
   with_items: "{{ openbox.alternatives }}"
 
-- name: enable network manager
-  service: name=network-manager enabled=yes
+- name: enable connman
+  service: name=connman enabled=yes
 
 - name: update networking config
   template:

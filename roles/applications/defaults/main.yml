@@ -1,16 +1,19 @@
 ---
 applications:
   repositories:
-    - entry: deb http://repo.vivaldi.com/stable/deb/ stable main
-      url: http://repo.vivaldi.com/stable/linux_signing_key.pub
     - entry: ppa:agornostal/ulauncher
   packages:
-    - name: password-gorilla
     - name: firefox
-    - name: chromium-browser
-    - name: vivaldi-stable
     - name: ulauncher
+      install_recommends: false
     - name: redshift-gtk
+      install_recommends: false
     - name: clipit
+    - name: geany
+  snaps:
+    - name: bitwarden
+      desktop_source: /snap/bitwarden/current/meta/gui/bitwarden.desktop
+    - name: chromium
+      desktop_source: /snap/chromium/current/meta/gui/chromium.desktop
 
   user_packages: []
