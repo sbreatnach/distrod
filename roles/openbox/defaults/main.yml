@@ -92,10 +92,40 @@ openbox:
           slant: normal
         ActiveOnScreenDisplay:
           name: sans
+          size: 12
+          weight: normal
+          slant: normal
+        InactiveOnScreenDisplay:
+          name: sans
+          size: 12
+          weight: normal
+          slant: normal
+    desktops:
       number: 2
     keybinds:
       - key: W-l
         name: Execute
+        command: xscreensaver-command -lock
+      - key: W-e
+        name: Execute
+        command: rox
+        startup_notify: Rox
+      - key: W-m
+        name: MoveResizeTo
+        x: center
+        y: center
+      - key: C-A-m
+        name: ShowMenu
+        menu: root-menu
+    mouse:
+      screen_edge_warp_time: 0
+  autostart:
+    - compton -b &
+    - xscreensaver -no-splash &
+    - tint2 &
+    - update-menus &
+    - conky &
+    - nm-applet &
     - cmst -m &
     - redshift-gtk &
     - udiskie --tray &
