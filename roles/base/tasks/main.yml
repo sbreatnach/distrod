@@ -4,6 +4,12 @@
        state=present
   with_items: "{{ base.packages }}"
 
+- name: prep flathub remote
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
 - name: create users
   user: name={{ item.username }} comment="{{ item.name }}"
         password={{ item.password|default(defaults.password) }} shell={{ item.shell }}

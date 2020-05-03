@@ -32,7 +32,7 @@ openbox:
     - label: Web Browser
       command: x-www-browser
     - label: Passwords
-      command: bitwarden
+      command: flatpak run com.bitwarden.desktop
     - label: File Manager
       command: pcmanfm
     - id: /Debian
@@ -61,7 +61,7 @@ openbox:
     shortcuts:
       - /usr/share/applications/tint2-menu.desktop
       - /usr/share/applications/x-www-browser.desktop
-      - /usr/share/applications/bitwarden.desktop
+      - /var/lib/flatpak/exports/share/applications/com.bitwarden.desktop.desktop
       - /usr/share/applications/x-terminal-emulator.desktop
 
   rc:
@@ -172,7 +172,7 @@ openbox:
     - feh
     - arandr
     - xcal
-    - adwaita-icon-theme-full
+    - adwaita-icon-theme
   # optional packages required for specific hardware (intended for user override)
   device_packages: []
   static_files:

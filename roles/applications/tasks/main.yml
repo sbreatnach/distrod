@@ -14,13 +14,6 @@
 - include: package.yml
   with_items: "{{ applications.user_packages }}"
 
-- name: install snaps
-  snap: name={{ item.name }}
-  with_items: "{{ applications.snaps }}"
-
-- name: add desktop shortcuts
-  file:
-    src: "{{ item.desktop_source }}"
-    dest: /usr/share/applications/{{ item.name }}.desktop
-    state: link
-  with_items: "{{ applications.snaps }}"
+- name: install flatpaks
+  flatpak: name={{ item.name }}
+  with_items: "{{ applications.flatpaks }}"
