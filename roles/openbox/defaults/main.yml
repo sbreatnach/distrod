@@ -126,7 +126,7 @@ openbox:
     - update-menus &
     - conky &
     - nm-applet &
-    - cmst -m &
+    - cmst -w 1 -m &
     - redshift-gtk &
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &

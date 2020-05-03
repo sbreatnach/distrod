@@ -7,3 +7,4 @@ base:
     - name: python3-pip
     - name: openjdk-11-jdk
     - name: flatpak
+    - name: bash-completion
