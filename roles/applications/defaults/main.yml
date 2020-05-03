@@ -1,16 +1,16 @@
 ---
 applications:
-  repositories:
-    - entry: deb http://repo.vivaldi.com/stable/deb/ stable main
-      url: http://repo.vivaldi.com/stable/linux_signing_key.pub
-    - entry: ppa:agornostal/ulauncher
+  repositories: []
   packages:
-    - name: password-gorilla
-    - name: firefox
-    - name: chromium-browser
-    - name: vivaldi-stable
-    - name: ulauncher
+    - name: iceweasel
+    - deb_name: ulauncher.deb
+      url: https://github.com/Ulauncher/Ulauncher/releases/download/5.7.5/ulauncher_5.7.5_all.deb
+      install_recommends: false
     - name: redshift-gtk
+      install_recommends: false
     - name: clipit
+    - name: geany
+  flatpaks:
+    - name: com.bitwarden.desktop
 
   user_packages: []

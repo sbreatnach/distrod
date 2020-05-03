@@ -5,7 +5,7 @@
   with_items: "{{ applications.repositories }}"
 
 - name: add repositories
-  apt_repository: repo='{{ item.entry }}' update_cache=yes
+  apt_repository: repo={{ item.entry }} update_cache=yes
   with_items: "{{ applications.repositories }}"
 
 - include: package.yml
@@ -13,3 +13,7 @@
 
 - include: package.yml
   with_items: "{{ applications.user_packages }}"
+
+- name: install flatpaks
+  flatpak: name={{ item.name }}
+  with_items: "{{ applications.flatpaks }}"

@@ -1,5 +1,5 @@
 [Default Applications]
-inode/directory=rox-filer.desktop
+inode/directory=pcmanfm.desktop
 image/jpeg=feh.desktop
 image/png=feh.desktop
 application/pdf=x-www-browser.desktop

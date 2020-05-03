@@ -32,9 +32,9 @@ openbox:
     - label: Web Browser
       command: x-www-browser
     - label: Passwords
-      command: password-gorilla
+      command: flatpak run com.bitwarden.desktop
     - label: File Manager
-      command: rox
+      command: pcmanfm
     - id: /Debian
       link: true
       separator: true
@@ -47,8 +47,6 @@ openbox:
       submenu:
         - label: Configure
           command: obconf
-        - label: Menu Editor
-          command: obmenu ~/.config/openbox/menu.xml
         - label: Displays
           command: arandr
         - label: Reconfigure
@@ -63,10 +61,9 @@ openbox:
     shortcuts:
       - /usr/share/applications/tint2-menu.desktop
       - /usr/share/applications/x-www-browser.desktop
-      - /usr/share/applications/password-gorilla.desktop
+      - /var/lib/flatpak/exports/share/applications/com.bitwarden.desktop.desktop
       - /usr/share/applications/x-terminal-emulator.desktop
 
-  device_packages: []
   rc:
     placement:
       policy: UnderMouse
@@ -129,6 +126,7 @@ openbox:
     - update-menus &
     - conky &
     - nm-applet &
+    - cmst -w 1 -m &
     - redshift-gtk &
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
@@ -139,15 +137,44 @@ openbox:
     hotkey: "<Primary><Alt>space"
   environment:
     lang: en_IE.UTF8
+  # any system packages installable via PyPi
   pip_packages:
     - name: carillon
       version: "1.0.2"
       executable: pip3
+  # base system packages to get a working, usable OS
   base_packages:
-    - python3-pip
     - gufw
-    - geany
     - ssh-askpass
+    - emacs-nox
+    - xorg
+    - x11-xserver-utils
+    - pulseaudio
+    - pavucontrol
+    - openbox
+    - obconf
+    - tint2
+    - xscreensaver
+    - rxvt-unicode
+    - scrot
+    - pcmanfm
+    - fortune-mod
+    - conky
+    - menu
+    - notify-osd
+    - libnotify-bin
+    - pasystray
+    - connman
+    - cmst
+    - udisks2
+    - udiskie
+    - compton
+    - feh
+    - arandr
+    - xcal
+    - adwaita-icon-theme
+  # optional packages required for specific hardware (intended for user override)
+  device_packages: []
   static_files:
   - src: sudo.conf
     dest: /etc/sudo.conf
@@ -161,59 +188,3 @@ openbox:
     dest: /usr/share/applications/x-terminal-emulator.desktop
   - src: shortcuts/tint2-menu.desktop
     dest: /usr/share/applications/tint2-menu.desktop
-  - src: shortcuts/rox-filer.desktop
-    dest: /usr/share/applications/rox-filer.desktop
-  packages:
-    - name: emacs25-nox
-    - name: xorg
-      version: "1:7.7*"
-    - name: x11-xserver-utils
-      version: "7.7*"
-    - name: pulseaudio
-      version: "1:11.1*"
-    - name: pavucontrol
-      version: "3.0*"
-    - name: openbox
-      version: "3.6*"
-    - name: obconf
-      version: "1:2.0*"
-    - name: obmenu
-      version: "1.0*"
-    - name: tint2
-      version: "16.2*"
-    - name: xscreensaver
-      version: "5.36*"
-    - name: rxvt-unicode
-      version: "9.22*"
-    - name: scrot
-      version: "0.8*"
-    - name: rox-filer
-      version: "1:2.11*"
-    - name: fortune-mod
-      version: "1:1.99*"
-    - name: conky
-      version: "1.10*"
-    - name: menu
-      version: "2.1*"
-    - name: notify-osd
-      version: "0.9*"
-    - name: libnotify-bin
-      version: "0.7*"
-    - name: pasystray
-      version: "0.6*"
-    - name: network-manager
-      version: "1.10*"
-    - name: network-manager-gnome
-      version: "1.8*"
-    - name: udisks2
-      version: "2.7*"
-    - name: udiskie
-      version: "1.7*"
-    - name: compton
-      version: "0.1*"
-    - name: feh
-      version: "2.23*"
-    - name: arandr
-      version: "0.1*"
-    - name: xcal
-      version: "4.1*"
