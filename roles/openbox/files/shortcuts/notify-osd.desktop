@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Notify OSD
+Comment=Display notifications
+Exec=/usr/lib/x86_64-linux-gnu/notify-osd
+Terminal=false
+Type=Application
+NotShowIn=KDE;
+X-GNOME-Autostart-enabled=false

@@ -108,8 +108,7 @@ openbox:
         command: xscreensaver-command -lock
       - key: W-e
         name: Execute
-        command: rox
-        startup_notify: Rox
+        command: pcmanfm
       - key: W-m
         name: MoveResizeTo
         x: center
@@ -188,3 +187,6 @@ openbox:
     dest: /usr/share/applications/x-terminal-emulator.desktop
   - src: shortcuts/tint2-menu.desktop
     dest: /usr/share/applications/tint2-menu.desktop
+  # fix for borked desktop file in notify-osd package
+  - src: shortcuts/notify-osd.desktop
+    dest: /etc/xdg/autostart/notify-osd.desktop

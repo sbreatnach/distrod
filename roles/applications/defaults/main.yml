@@ -9,6 +9,8 @@ applications:
       install_recommends: false
     - name: redshift-gtk
       install_recommends: false
+    - name: geoclue-2.0
+      install_recommends: false
     - name: clipit
     - name: geany
   flatpaks:
