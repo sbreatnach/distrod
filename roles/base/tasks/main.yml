@@ -15,6 +15,9 @@
         password={{ item.password|default(defaults.password) }} shell={{ item.shell }}
   with_items: "{{ users }}"
 
+- name: add polkit rule for mounting volumes
+  template: src=mount-internal.rules.j2 dest=/usr/share/polkit-1/rules.d/pcmanfm.mount.rules
+
 - name: enable sudo access for appropriate users
   template: src=sudoers.j2 dest=/etc/sudoers.d/users
 
@@ -23,3 +26,6 @@
 
 - name: disable system beep
   copy: src=nobeep.conf dest=/etc/modprobe.d/nobeep.conf
+
+- name: configure sysctl settings
+  copy: src=sysctl.conf dest=/etc/sysctl.conf

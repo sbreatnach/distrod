@@ -119,6 +119,7 @@ openbox:
     mouse:
       screen_edge_warp_time: 0
   autostart:
+    - lxpolkit &
     - compton -b &
     - xscreensaver -no-splash &
     - tint2 &
@@ -144,6 +145,7 @@ openbox:
   # base system packages to get a working, usable OS
   base_packages:
     - gufw
+    - lxpolkit
     - ssh-askpass
     - emacs-nox
     - xorg
