@@ -113,6 +113,9 @@ openbox:
         name: MoveResizeTo
         x: center
         y: center
+      - key: C-A-h
+        name: Execute
+        command: diodon
       - key: C-A-m
         name: ShowMenu
         menu: root-menu
@@ -131,7 +134,7 @@ openbox:
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
-    - clipit &
+    - diodon &
     - carillon &
   launcher:
     hotkey: "<Primary><Alt>space"
@@ -174,6 +177,7 @@ openbox:
     - arandr
     - xcal
     - adwaita-icon-theme
+    - diodon
   # optional packages required for specific hardware (intended for user override)
   device_packages: []
   static_files:
