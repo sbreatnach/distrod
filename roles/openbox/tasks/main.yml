@@ -36,7 +36,15 @@
     src: network_interfaces.j2
     dest: /etc/network/interfaces
 
+- name: retrieve all standard usernames
+  script:
+    cmd: list_usernames.sh
+  register: raw_usernames
+- name: clean raw usernames into list
+  set_fact:
+    all_usernames: "{{ raw_usernames.stdout_lines|select|list }}"
+
 - include: user.yml
-  with_items: "{{ users }}"
+  with_items: "{{ all_usernames }}"
   loop_control:
-    loop_var: cur_user
+    loop_var: cur_username

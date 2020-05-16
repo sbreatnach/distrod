@@ -50,11 +50,7 @@ defaults:
     # ensure any override ends with /
     resources: resources/
     app: /usr/local/apps
-users:
-  - username: vagrant
-    shell: /bin/bash
-    name: Vagrant
-    sudoer: true
+users: []
 partitions:
   - path: /
 network_devices:

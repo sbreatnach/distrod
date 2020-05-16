@@ -1,10 +1,10 @@
 ---
 - name: user-specific facts
   set_fact:
-    home_dir: /home/{{ cur_user.username }}
+    home_dir: /home/{{ cur_username }}
 
 - name: create config dirs
-  become_user: "{{ cur_user.username }}"
+  become_user: "{{ cur_username }}"
   file: state=directory path={{ item }}
   with_items:
     - "{{ home_dir }}/.config/openbox"
@@ -14,11 +14,11 @@
     - "{{ home_dir }}/.config/carillon"
 
 - name: create X init script
-  become_user: "{{ cur_user.username }}"
+  become_user: "{{ cur_username }}"
   template: src=xinitrc.j2 dest={{ home_dir }}/.xinitrc mode=0744
 
 - name: create config files
-  become_user: "{{ cur_user.username }}"
+  become_user: "{{ cur_username }}"
   template: src={{ item.file }}.j2 dest={{ home_dir }}/{{ item.dir }}/{{ item.output_file|default(item.file) }}
   with_items:
     - { file: xresources, dir: ".", output_file: .Xresources }
@@ -33,5 +33,5 @@
     - { file: carillon.yml, dir: .config/carillon, output_file: default.yml }
 
 - name: copy resources
-  become_user: "{{ cur_user.username }}"
+  become_user: "{{ cur_username }}"
   copy: src={{ defaults.dirs.resources }} dest={{ home_dir }}/resources

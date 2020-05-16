@@ -22,7 +22,7 @@ like a fancy application launcher, automatic USB drive mounting, night light etc
 
 Works on Xenial:
 
-    sudo apt-get install vagrant virtualbox python3-pip libffi-dev libssl-dev sshpass
+    sudo apt-get install python3-pip sshpass
     sudo pip3 install ansible>=2.9.7
 
 # Ansible Configuration
@@ -31,26 +31,9 @@ All Ansible role pre-requisites for DistroD should be installed initially:
 
     ansible-galaxy install -r requirements.yml
 
-# Vagrant Testing
-
-This project comes with a Vagrant setup to test your configuration. Running the
-test is easy:
-
-    vagrant up
-    ansible-playbook -b -u vagrant -i vm_inventory \
-        --private-key .vagrant/machines/ubuntu_bionic/virtualbox/private_key \
-        playbook.yml
-
-Running the tests in Windows is slightly more involved. The IP address assigned to the VM by HyperV is dynamic so the hyperv_inventory file must be generated manually. Use vm_inventory as a template:
-
-    vagrant up
-    ansible-playbook -b -u vagrant -i hyperv_inventory \
-        --private-key .vagrant/machines/ubuntu_bionic/hyperv/private_key \
-        playbook.yml
-
 # Target Configuration
 
-**Ubuntu Server 20.04 LTS** is the targeted base distro.
+**Debian Buster** is the targeted base distro.
 Before running the playbook, ensure you can SSH to the target machine
 beforehand. For example:
 
@@ -68,8 +51,8 @@ specifying extra variable files. The following describes the most important conf
 
 ## User
 
-By default, the playbook creates a single user with the username `vagrant` and
-password `vagrant`. Unless specified otherwise, every user configured will, by
+By default, the playbook creates no users and updates existing standard users.
+Extra users may be created. Unless specified otherwise, every user configured will, by
 default, be assigned the password `vagrant`.
 Users can be overridden in your local vars file. For example, the following
 generates a single user named Max Power:
