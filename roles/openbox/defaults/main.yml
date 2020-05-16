@@ -178,6 +178,7 @@ openbox:
     - xcal
     - adwaita-icon-theme
     - diodon
+    - xarchiver
   # optional packages required for specific hardware (intended for user override)
   device_packages: []
   static_files:
