@@ -68,6 +68,27 @@ Note that the value of password is crypted in the format Ansible requires.
 See [Ansible's documentation](http://docs.ansible.com/ansible/latest/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for how to create a crypted password value.
 
+## High DPI Support
+
+High DPI support for all displays can be enabled with a few settings.
+
+The following sets a DPI of 168 (175% scaling) with additional tweaks
+and global settings for various applications:
+```yaml
+display:
+  dpi: 168
+  scaling:
+    gdk_scale: 2
+    gdk_dpi_scale: 0.5
+    qt_auto_screen_scale_factor: 1
+openbox:
+  panel:
+    width: 100
+    height: 42
+    icon_size: 40
+    max_task_width: 250
+```
+
 ## Device Packages
 
 Any packages that are required for your hardware can be set with this variable.

@@ -35,12 +35,6 @@ openbox:
       command: flatpak run com.bitwarden.desktop
     - label: File Manager
       command: pcmanfm
-    - id: /Debian
-      link: true
-      separator: true
-    - id: client-list-menu
-      link: true
-      separator: true
     - label: Configuration
       id: /Openbox/Configuration
       separator: true
@@ -51,18 +45,20 @@ openbox:
           command: arandr
         - label: Reconfigure
           action_name: Reconfigure
-    - label: Quit
+    - label: Logout...
       separator: true
       command: oblogout
 
   panel:
-    # L: launcher, T: Taskbar, S: system tray, B: battery, C: clock
-    display_items: LTSBC
+    width: 100
+    height: 24
+    icon_size: 22
+    max_task_width: 150
     shortcuts:
-      - /usr/share/applications/tint2-menu.desktop
-      - /usr/share/applications/x-www-browser.desktop
-      - /var/lib/flatpak/exports/share/applications/com.bitwarden.desktop.desktop
-      - /usr/share/applications/x-terminal-emulator.desktop
+      - pcmanfm.desktop
+      - lxde-x-www-browser.desktop
+      - com.bitwarden.desktop.desktop
+      - lxde-x-terminal-emulator.desktop
 
   rc:
     placement:
@@ -125,7 +121,7 @@ openbox:
     - lxpolkit &
     - compton -b &
     - xscreensaver -no-splash &
-    - tint2 &
+    - lxpanel &
     - update-menus &
     - conky &
     - nm-applet &
@@ -157,7 +153,6 @@ openbox:
     - pavucontrol
     - openbox
     - obconf
-    - tint2
     - xscreensaver
     - rxvt-unicode
     - scrot
@@ -176,11 +171,18 @@ openbox:
     - feh
     - arandr
     - xcal
+    - yad
+    - lxpanel
     - adwaita-icon-theme
     - diodon
     - xarchiver
   # optional packages required for specific hardware (intended for user override)
   device_packages: []
+  user_static_files:
+  - src: lxpanel/config
+    dest: .config/lxpanel/default/config
+  - src: lxpanel/launchtaskbar.cfg
+    dest: .config/lxpanel/launchtaskbar.cfg
   static_files:
   - src: sudo.conf
     dest: /etc/sudo.conf
@@ -192,8 +194,6 @@ openbox:
     dest: /usr/share/applications/x-www-browser.desktop
   - src: shortcuts/x-terminal-emulator.desktop
     dest: /usr/share/applications/x-terminal-emulator.desktop
-  - src: shortcuts/tint2-menu.desktop
-    dest: /usr/share/applications/tint2-menu.desktop
   # fix for borked desktop file in notify-osd package
   - src: shortcuts/notify-osd.desktop
     dest: /etc/xdg/autostart/notify-osd.desktop

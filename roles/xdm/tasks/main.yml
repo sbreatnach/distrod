@@ -2,5 +2,8 @@
 - name: install packages
   apt: name={{ xdm.packages }} state=present
 
+- name: configure X servers for every xdm session
+  template: src=Xservers.j2 dest=/etc/X11/xdm/Xservers
+
 # TODO: make this optional based on system if supporting older Debian systems
 - include: systemd.yml

@@ -1,4 +1,10 @@
 ---
+display:
+  dpi: 96
+  scaling:
+    gdk_scale: 1
+    gdk_dpi_scale: 1
+    qt_auto_screen_scale_factor: 0
 machine:
   acpi_events:
     # all these were found with acpi_listen

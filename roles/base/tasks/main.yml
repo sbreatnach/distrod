@@ -24,6 +24,9 @@
 - name: update environment with extra paths
   template: src=environment.j2 dest=/etc/environment
 
+- name: set global environment variables for every login
+  template: src=pam_env.conf.j2 dest=/etc/security/pam_env.conf
+
 - name: disable system beep
   copy: src=nobeep.conf dest=/etc/modprobe.d/nobeep.conf
 

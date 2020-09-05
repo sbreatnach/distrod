@@ -9,9 +9,14 @@
   with_items:
     - "{{ home_dir }}/.config/openbox"
     - "{{ home_dir }}/.config/conky"
-    - "{{ home_dir }}/.config/tint2"
+    - "{{ home_dir }}/.config/lxpanel/default/panels"
     - "{{ home_dir }}/.config/ulauncher"
     - "{{ home_dir }}/.config/carillon"
+
+- name: create static user files
+  become_user: "{{ cur_username }}"
+  file: src={{ item.src }} dest={{ home_dir }}/{{ item.dest }}
+  with_items: "{{ openbox.user_static_files }}"
 
 - name: create X init script
   become_user: "{{ cur_username }}"
@@ -28,7 +33,7 @@
     - { file: menu.xml, dir: .config/openbox }
     - { file: autostart, dir: .config/openbox }
     - { file: conky.conf, dir: .config/conky }
-    - { file: tint2rc, dir: .config/tint2 }
+    - { file: lxpanel_panel, dir: .config/lxpanel/default/panels, output_file: panel }
     - { file: ulauncher_settings.json, dir: .config/ulauncher, output_file: settings.json }
     - { file: carillon.yml, dir: .config/carillon, output_file: default.yml }
 

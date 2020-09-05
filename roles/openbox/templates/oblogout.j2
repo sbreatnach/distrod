@@ -1,7 +1,9 @@
 #!/bin/sh
 
 MESSAGE=`fortune`
-xmessage -buttons Cancel:0,Logout:1,Suspend:2,Reboot:3,Shutdown:4 "${MESSAGE}"
+yad --text-entry --title="Leaving?" --text="${MESSAGE}" \
+    --button=Cancel:0 --button=Logout:1 --button=Suspend:2 \
+    --button=Reboot:3 --button=Shutdown:4 --center --escape-ok
 
 case "$?" in
 1)
