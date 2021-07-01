@@ -123,7 +123,11 @@ testbed_vars.yml and testbed_inventory:
 
 # TODO
 
+* earlyoom for better low-memory handling
 * Dynamic monitor and resolution detection
 * Configure fstab based on partitions specified
 * Use systemd for daemons to enable automatic restarting on crashes
 * VNC server
+* CUPS install and printer/scanner config
+** Take IP address (e.g. 192.168.0.115) and add based on printer driver selection
+** Install sane-airscan, update /etc/sane.d/epson2.conf and set explicit IP address

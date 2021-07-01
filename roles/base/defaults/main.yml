@@ -8,3 +8,4 @@ base:
     - name: openjdk-11-jdk
     - name: flatpak
     - name: bash-completion
+    - name: isc-dhcp-server
