@@ -123,6 +123,7 @@ testbed_vars.yml and testbed_inventory:
 
 # TODO
 
+* Revert to network manager for network connection handling
 * earlyoom for better low-memory handling
 * Dynamic monitor and resolution detection
 * Configure fstab based on partitions specified
