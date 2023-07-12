@@ -7,8 +7,9 @@
        state=present
 
 - name: install python packages
-  pip: "{{ item }}"
-  with_items: "{{ openbox.pip_packages }}"
+  community.general.pipx:
+    name: "{{ item }}"
+  with_items: "{{ openbox.pipx_packages }}"
 
 - name: copy static files
   copy:
@@ -25,16 +26,12 @@
   shell: update-menus
 
 - name: set alternatives
-  shell: update-alternatives --set {{ item.command }} {{ item.executable }}
+  shell: "update-alternatives --{{ item.subcommand }} {{ item.link|default('') }}
+          {{ item.name }} {{ item.executable }} {{ item.priority|default('') }}"
   with_items: "{{ openbox.alternatives }}"
 
-- name: enable connman
-  service: name=connman enabled=yes
-
-- name: update networking config
-  template:
-    src: network_interfaces.j2
-    dest: /etc/network/interfaces
+- name: enable network manager
+  service: name=NetworkManager enabled=yes
 
 - name: retrieve all standard usernames
   script:

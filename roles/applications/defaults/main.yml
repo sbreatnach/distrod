@@ -4,7 +4,7 @@ applications:
   packages:
     - name: vlc
     - deb_name: ulauncher.deb
-      url: https://github.com/Ulauncher/Ulauncher/releases/download/5.7.5/ulauncher_5.7.5_all.deb
+      url: https://github.com/Ulauncher/Ulauncher/releases/download/5.15.2/ulauncher_5.15.2_all.deb
     - name: redshift-gtk
     - name: geoclue-2.0
     - name: geany

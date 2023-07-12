@@ -2,8 +2,14 @@
 openbox:
   xrandr_configuration: ""
   alternatives:
-    - command: x-terminal-emulator
+    - name: x-terminal-emulator
       executable: /usr/bin/urxvt
+      subcommand: set
+    - link: /usr/bin/x-www-browser
+      name: x-www-browser
+      executable: /var/lib/flatpak/exports/bin/org.mozilla.firefox
+      priority: "100"
+      subcommand: install
   keyboard:
     selected: en_gb
     layouts:
@@ -32,7 +38,7 @@ openbox:
     - label: Web Browser
       command: x-www-browser
     - label: Passwords
-      command: flatpak run com.bitwarden.desktop
+      command: /var/lib/flatpak/exports/bin/com.bitwarden.desktop
     - label: File Manager
       command: pcmanfm
     - label: Configuration
@@ -56,7 +62,7 @@ openbox:
     max_task_width: 150
     shortcuts:
       - pcmanfm.desktop
-      - lxde-x-www-browser.desktop
+      - x-www-browser.desktop
       - com.bitwarden.desktop.desktop
       - lxde-x-terminal-emulator.desktop
 
@@ -125,7 +131,6 @@ openbox:
     - update-menus &
     - conky &
     - nm-applet &
-    - cmst -w 1 -m &
     - redshift-gtk &
     - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
@@ -133,16 +138,15 @@ openbox:
     - diodon &
     - carillon &
   launcher:
-    hotkey: "<Primary><Alt>space"
+    hotkey: "<Primary><Alt>L"
   environment:
     lang: en_IE.UTF8
   # any system packages installable via PyPi
-  pip_packages:
-    - name: carillon
-      version: "1.0.2"
-      executable: pip3
+  pipx_packages: []
+    #- name: carillon==1.0.2
   # base system packages to get a working, usable OS
   base_packages:
+    - libcairo2
     - gufw
     - lxpolkit
     - ssh-askpass
@@ -163,14 +167,14 @@ openbox:
     - notify-osd
     - libnotify-bin
     - pasystray
-    - connman
+    - network-manager
+    - network-manager-gnome
     - cmst
     - udisks2
     - udiskie
     - compton
     - feh
     - arandr
-    - xcal
     - yad
     - lxpanel
     - adwaita-icon-theme
