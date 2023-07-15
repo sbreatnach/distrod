@@ -1,17 +1,25 @@
 ---
 - name: install {{ item.name|default('') }}
+  community.general.portinstall:
+    name: "{{ item.name }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  environment: "{{ item.environment|default({}) }}"
+  when: item.name is defined and os_target == 'freebsd'
+
+- name: install {{ item.name|default('') }}
   apt: state=present
        name={{ item.name }}{% if item.version is defined %}={{ item.version }}*{% endif %}
        install_recommends={{ item.install_recommends|default(false) }}
-  when: item.name is defined
+  when: item.name is defined and os_target == 'linux'
 
 - name: get url {{ item.url|default('') }}
-  get_url: url={{ item.url }} dest={{ defaults.dirs.tmp }}/{{ item.deb_name|default(item.archive_name) }}
+  get_url: url={{ item.url }} dest={{ defaults.dirs.tmp }}/{{ item.pkg_name|default(item.archive_name) }}
   when: item.url is defined
 
-- name: install deb {{ item.deb_name|default('') }}
-  apt: state=present deb={{ defaults.dirs.tmp }}/{{ item.deb_name }}
-  when: item.deb_name is defined
+- name: install pkg {{ item.pkg_name|default('') }}
+  apt: state=present deb={{ defaults.dirs.tmp }}/{{ item.pkg_name }}
+  when: item.pkg_name is defined and os_target == 'linux'
 
 - name: install archive {{ item.archive_name|default('') }}
   unarchive: src={{ defaults.dirs.tmp }}/{{ item.archive_name }}

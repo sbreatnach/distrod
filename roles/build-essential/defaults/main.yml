@@ -1,0 +1,17 @@
+---
+buildessential:
+  linux:
+    packages:
+      - autoconf
+      - binutils-doc
+      - bison
+      - build-essential
+      - flex
+      - gettext
+      - ncurses-dev
+  freebsd:
+    packages:
+      - devel/gettext
+      - devel/autoconf
+      - devel/ncurses
+      - devel/bison

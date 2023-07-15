@@ -1,22 +1,25 @@
 #!/bin/sh
 
-# /etc/X11/xinit/xinitrc
+# {{ openbox[os_target].directories.x11_config }}/xinit/xinitrc
 #
 # global xinitrc file, used by all X sessions started by xinit (startx)
 
-# invoke global X session script
-. /etc/X11/Xsession
+# invoke global X session script (only in Linux, causes issues in FreeBSD)
+if [ -f {{ openbox[os_target].directories.x11_config }}/Xsession ]
+then
+    . {{ openbox[os_target].directories.x11_config }}/Xsession
+fi
 
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+if [ -d {{ openbox[os_target].directories.x11_config }}/xinit/xinitrc.d ] ; then
+    for f in {{ openbox[os_target].directories.x11_config }}/xinit/xinitrc.d/?*.sh ; do
         [ -x "$f" ] && . "$f"
     done
     unset f
 fi
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[ -f ~/.Xresources ] && xrdb -merge "-I$HOME" ~/.Xresources
 
-{% if openbox.touchpad.enabled %}
+{% if openbox.touchpad.enabled and os_target == 'linux' %}
 # Disable tap to click on touchpad
 {% if not openbox.touchpad.tap_to_click %}
 synclient TapButton1=0
@@ -27,7 +30,7 @@ synclient TapButton3=0
 
 # PolicyKit daemon for power management and other privileged actions
 # https://wiki.archlinux.org/index.php/Polkit
-/usr/lib/policykit-1/polkitd --no-debug &
+{{ openbox[os_target].directories.policykit_lib }}/polkitd --no-debug &
 
 # wrap session in dbus so we can automount USB disks etc.
 # NB: note this is will cause issues if using display manager that does this for you

@@ -8,9 +8,9 @@ Global {
   widthtype=percent
   width={{ openbox.panel.width }}
   height={{ openbox.panel.height }}
-  transparent=1
-  tintcolor=#000000
-  alpha=0
+  transparent=0
+  tintcolor=#aaaaaa
+  alpha=255
   setdocktype=1
   setpartialstrut=1
   usefontcolor=1
@@ -18,14 +18,14 @@ Global {
   usefontsize=0
   fontsize=10
   background=0
-  backgroundfile=/usr/share/lxpanel/images/background.png
+  backgroundfile={{ openbox[os_target].directories.lxpanel_common }}/images/background.png
   iconsize={{ openbox.panel.icon_size }}
   monitor=-1
 }
 Plugin {
   type=menu
   Config {
-    image=/usr/share/lxpanel/images/my-computer.png
+    image={{ openbox[os_target].directories.lxpanel_common }}/images/my-computer.png
     system {
     }
     separator {

@@ -1,0 +1,19 @@
+---
+- import_tasks: linux.yml
+  when: os_target == 'linux'
+
+- import_tasks: freebsd.yml
+  when: os_target == 'freebsd'
+
+- name: Fetch leapseconds file
+  get_url:
+    url: "{{ ntp.leapurl }}"
+    dest: "{{ ntp[os_target].leapfile }}"
+    owner: "root"
+    group: "root"
+    mode: "0660"
+
+- name: Configure ntp (/etc/ntp.conf)
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf

@@ -2,12 +2,90 @@
 base:
   extra_paths:
     - /snap/bin
-  packages:
-    - name: git
-    - name: python3-pip
-    - name: pipx
-    - name: pkgconf
-    - name: openjdk-17-jdk
-    - name: flatpak
-    - name: bash-completion
-    - name: isc-dhcp-server
+  freebsd:
+    compat:
+      directories:
+        root: /compat/debian
+    packages:
+      - security/sudo
+      - devel/git
+      - devel/pkgconf
+      - devel/py-pipx
+      - java/openjdk17
+      - shells/bash
+      - shells/bash-completion
+      - textproc/jq
+      - multimedia/webcamd
+      - net/geoclue
+  linux:
+    packages:
+      - acpid
+      - git
+      - pipx
+      - pkgconf
+      - openjdk-17-jdk
+      - python3-pip
+      - flatpak
+      - bash-completion
+
+machine:
+  wifi:
+    enabled: false
+    ssid: dummy
+    psk: dummy
+  cpu: generic
+  packages: []
+  microcode:
+    amd:
+      enabled: false
+      package: sysutils/devcpu-data-amd
+      file_path: /boot/firmware/amd-ucode.bin
+    intel:
+      enabled: false
+      package: sysutils/devcpu-data-intel
+      file_path: /boot/firmware/intel-ucode.bin
+  modules: []
+  sysrc: []
+  acpi_events:
+    # all these were found with acpi_listen
+    # override these as needed depending on hardware
+    power:
+      - name: sleep_button
+        event: button[ /]sleep
+        command: SBTN
+        execute: systemctl suspend
+      - name: lid_open
+        event: button[ /]lid
+        template: lid
+        command: LID
+        arguments: open
+        execute: systemctl resume
+      - name: lid_close
+        event: button[ /]lid
+        template: lid
+        command: LID
+        arguments: close
+        execute: systemctl suspend
+    general:
+      - name: lock
+        event: button[ /]screenlock
+        command: SCRNLCK
+        template: run_users
+        execute: xscreensaver-command -lock
+    volume:
+      - name: mute
+        event: button[ /]mute
+        command: MUTE
+        template: run_users
+        execute: pactl set-sink-mute @DEFAULT_SINK@ toggle
+      - name: volume_up
+        event: button[ /]volumeup
+        command: VOLUP
+        template: run_users
+        execute: pactl set-sink-volume @DEFAULT_SINK@ +10%
+      - name: volume_down
+        event: button[ /]volumedown
+        command: VOLDN
+        template: run_users
+        execute: pactl set-sink-volume @DEFAULT_SINK@ -10%
+    media: []

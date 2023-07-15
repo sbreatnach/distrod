@@ -1,0 +1,4 @@
+---
+personal:
+  packages:
+    - textproc/the_silver_searcher

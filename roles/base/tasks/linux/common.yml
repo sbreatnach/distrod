@@ -1,0 +1,29 @@
+---
+- name: install base packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ base.linux.packages }}"
+
+- name: prep flathub remote
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: add polkit rule for mounting volumes
+  template: src=mount-internal.rules.j2 dest=/usr/share/polkit-1/rules.d/pcmanfm.mount.rules
+
+- name: update environment with extra paths
+  template: src=environment.j2 dest=/etc/environment
+
+- name: set global environment variables for every login
+  template: src=pam_env.conf.j2 dest=/etc/security/pam_env.conf
+
+- name: disable system beep
+  copy: src=nobeep.conf dest=/etc/modprobe.d/nobeep.conf
+
+- include_tasks: acpi_events.yml
+  with_dict: "{{ machine.acpi_events }}"
+  loop_control:
+    loop_var: acpi_events

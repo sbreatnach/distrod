@@ -5,50 +5,6 @@ display:
     gdk_scale: 1
     gdk_dpi_scale: 1
     qt_auto_screen_scale_factor: 0
-machine:
-  acpi_events:
-    # all these were found with acpi_listen
-    # override these as needed depending on hardware
-    power:
-      - name: sleep_button
-        event: button[ /]sleep
-        command: SBTN
-        execute: systemctl suspend
-      - name: lid_open
-        event: button[ /]lid
-        template: lid
-        command: LID
-        arguments: open
-        execute: systemctl resume
-      - name: lid_close
-        event: button[ /]lid
-        template: lid
-        command: LID
-        arguments: close
-        execute: systemctl suspend
-    general:
-      - name: lock
-        event: button[ /]screenlock
-        command: SCRNLCK
-        template: run_users
-        execute: xscreensaver-command -lock
-    volume:
-      - name: mute
-        event: button[ /]mute
-        command: MUTE
-        template: run_users
-        execute: pactl set-sink-mute @DEFAULT_SINK@ toggle
-      - name: volume_up
-        event: button[ /]volumeup
-        command: VOLUP
-        template: run_users
-        execute: pactl set-sink-volume @DEFAULT_SINK@ +10%
-      - name: volume_down
-        event: button[ /]volumedown
-        command: VOLDN
-        template: run_users
-        execute: pactl set-sink-volume @DEFAULT_SINK@ -10%
-    media: []
 defaults:
   password: $6$6J3nXIJ4xZg7$RayRiuVr4oV20PBFkz7O9dKo0rzFeml6c2WWHGhYvV8cbikbnKr0MEDoGfQlF01ZOD/0HwsJBzO2/Iia2UVbf.
   dirs:
@@ -61,3 +17,8 @@ partitions:
   - path: /
 network_devices:
   - eth0
+locale:
+  install_locales:
+    - en_IE.UTF-8
+  charset: UTF-8
+  lang: en_IE.UTF-8

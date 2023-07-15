@@ -1,0 +1,16 @@
+---
+- name: add repository keys
+  apt_key: state=present url={{ item.url }}
+  when: item.url is defined
+  with_items: "{{ applications.linux.repositories }}"
+
+- name: add repositories
+  apt_repository: repo={{ item.entry }} update_cache=yes
+  with_items: "{{ applications.linux.repositories }}"
+
+- include_tasks: package.yml
+  with_items: "{{ applications.linux.packages }}"
+
+- name: install flatpaks
+  flatpak: name={{ item.name }}
+  with_items: "{{ applications.linux.flatpaks }}"

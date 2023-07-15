@@ -1,4 +1,6 @@
 ---
+machine_type: generic
+package_installer: precompiled
 ufw_rules:
   - port: 80
     rule: allow

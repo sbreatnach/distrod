@@ -1,0 +1,24 @@
+---
+- name: install base packages
+  apt: name={{ openbox.linux.base_packages }} state=present
+
+- name: install device packages
+  apt: name={{ openbox.linux.device_packages }}
+       state=present
+
+- name: enable network manager
+  service: name=NetworkManager enabled=yes
+
+- name: set alternatives
+  shell: "update-alternatives --{{ item.subcommand }} {{ item.link|default('') }}
+          {{ item.name }} {{ item.executable }} {{ item.priority|default('') }}"
+  with_items: "{{ openbox.linux.alternatives }}"
+
+- name: copy static files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{% if item.directory is defined %}{{ openbox[os_target].directories[item.directory] }}/{% endif %}{{ item.dest }}"
+  with_items: "{{ openbox.linux.static_files }}"
+
+- name: create OS menu
+  shell: update-menus

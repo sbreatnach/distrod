@@ -4,10 +4,12 @@
   with_items:
     - app
 
-- name: install ACPI if not already installed
-  apt: name=acpid
+- name: set FreeBSD facts
+  set_fact:
+    os_target: freebsd
+  when: ansible_facts['os_family'] == 'FreeBSD'
 
-- include: acpi_events.yml
-  with_dict: "{{ machine.acpi_events }}"
-  loop_control:
-    loop_var: acpi_events
+- name: set Linux facts
+  set_fact:
+    os_target: linux
+  when: ansible_facts['os_family'] == 'Debian'

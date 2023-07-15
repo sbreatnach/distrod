@@ -1,0 +1,18 @@
+---
+- name: install package
+  community.general.portinstall:
+    name: net/ntp
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+
+- name: configure daemons
+  community.general.sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items:
+    - name: ntpd_enable
+      value: "YES"
+    - name: ntpd_program
+      value: /usr/local/sbin/ntpd
+    - name: ntpdate_program
+      value: /usr/local/sbin/ntpdate

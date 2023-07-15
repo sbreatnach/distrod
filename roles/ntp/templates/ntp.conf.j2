@@ -1,0 +1,20 @@
+driftfile {{ ntp[os_target].driftfile }}
+# statistics will be logged
+statsdir /var/log/ntpstats/
+
+leapfile {{ ntp[os_target].leapfile }}
+
+statistics loopstats peerstats clockstats
+filegen loopstats file loopstats type day enable
+filegen peerstats file peerstats type day enable
+filegen clockstats file clockstats type day enable
+
+# Specification of one or more NTP servers
+{% for ntp_server in ntp.servers %}
+server {{ntp_server}}
+{% endfor %}
+
+# ntp restricts
+{% for restrict in ntp.restricts %}
+{{restrict}}
+{% endfor %}

@@ -1,10 +1,9 @@
 ---
-- name: install base packages
-  apt: name={{ openbox.base_packages }} state=present
+- import_tasks: linux.yml
+  when: os_target == 'linux'
 
-- name: install device packages
-  apt: name={{ openbox.device_packages }}
-       state=present
+- import_tasks: freebsd.yml
+  when: os_target == 'freebsd'
 
 - name: install python packages
   community.general.pipx:
@@ -14,24 +13,19 @@
 - name: copy static files
   copy:
     src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    dest: "{% if item.directory is defined %}{{ openbox[os_target].directories[item.directory] }}/{% endif %}{{ item.dest }}"
   with_items: "{{ openbox.static_files }}"
 
+- name: copy templated files
+  template:
+    src: "{{ item.src }}"
+    dest: "{% if item.directory is defined %}{{ openbox[os_target].directories[item.directory] }}/{% endif %}{{ item.dest }}"
+  with_items: "{{ openbox.templated_files }}"
+
 - name: create openbox scripts
-  template: src={{ item }}.j2 dest=/usr/bin/{{ item }} mode=0755
+  template: src={{ item }}.j2 dest={{ openbox[os_target].directories.usr_bin }}/{{ item }} mode=0755
   with_items:
     - oblogout
-
-- name: create Debian menu
-  shell: update-menus
-
-- name: set alternatives
-  shell: "update-alternatives --{{ item.subcommand }} {{ item.link|default('') }}
-          {{ item.name }} {{ item.executable }} {{ item.priority|default('') }}"
-  with_items: "{{ openbox.alternatives }}"
-
-- name: enable network manager
-  service: name=NetworkManager enabled=yes
 
 - name: retrieve all standard usernames
   script:
@@ -41,7 +35,7 @@
   set_fact:
     all_usernames: "{{ raw_usernames.stdout_lines|select|list }}"
 
-- include: user.yml
+- include_tasks: user.yml
   with_items: "{{ all_usernames }}"
   loop_control:
     loop_var: cur_username

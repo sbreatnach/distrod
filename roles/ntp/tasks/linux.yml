@@ -1,0 +1,5 @@
+---
+- name: Make sure the dependencies are installed
+  apt:
+    pkg: ntp
+    state: present

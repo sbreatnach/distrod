@@ -1,4 +1,12 @@
 ---
 xdm:
-  packages:
-    - xdm
+  freebsd:
+    directories:
+      x11_config: /usr/local/etc/X11
+    packages:
+      - x11/xdm
+  linux:
+    directories:
+      x11_config: /etc/X11
+    packages:
+      - xdm

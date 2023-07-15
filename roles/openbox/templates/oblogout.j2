@@ -11,13 +11,25 @@ case "$?" in
 ;;
 2)
     xscreensaver-command -lock
+    {% if os_target == 'freebsd' %}
+    /etc/rc.suspend acpi S3
+    {% else %}
     systemctl suspend
+    {% endif %}
 ;;
 3)
+    {% if os_target == 'freebsd' %}
+    shutdown -r now
+    {% else %}
     systemctl reboot
+    {% endif %}
 ;;
 4)
+    {% if os_target == 'freebsd' %}
+    shutdown -p now
+    {% else %}
     systemctl poweroff
+    {% endif %}
 ;;
 esac
 exit 0

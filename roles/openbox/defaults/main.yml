@@ -1,15 +1,6 @@
 ---
 openbox:
   xrandr_configuration: ""
-  alternatives:
-    - name: x-terminal-emulator
-      executable: /usr/bin/urxvt
-      subcommand: set
-    - link: /usr/bin/x-www-browser
-      name: x-www-browser
-      executable: /var/lib/flatpak/exports/bin/org.mozilla.firefox
-      priority: "100"
-      subcommand: install
   keyboard:
     selected: en_gb
     layouts:
@@ -37,16 +28,16 @@ openbox:
       command: x-terminal-emulator
     - label: Web Browser
       command: x-www-browser
-    - label: Passwords
-      command: /var/lib/flatpak/exports/bin/com.bitwarden.desktop
     - label: File Manager
       command: pcmanfm
     - label: Configuration
       id: /Openbox/Configuration
       separator: true
       submenu:
-        - label: Configure
+        - label: Openbox
           command: obconf
+        - label: Compositor
+          command: compton-conf
         - label: Displays
           command: arandr
         - label: Reconfigure
@@ -63,8 +54,7 @@ openbox:
     shortcuts:
       - pcmanfm.desktop
       - x-www-browser.desktop
-      - com.bitwarden.desktop.desktop
-      - lxde-x-terminal-emulator.desktop
+      - x-terminal-emulator.desktop
 
   rc:
     placement:
@@ -117,26 +107,19 @@ openbox:
         y: center
       - key: C-A-h
         name: Execute
-        command: diodon
+        command: x-clipboard-manager
       - key: C-A-m
         name: ShowMenu
         menu: root-menu
     mouse:
       screen_edge_warp_time: 0
   autostart:
-    - lxpolkit &
     - compton -b &
     - xscreensaver -no-splash &
     - lxpanel &
-    - update-menus &
     - conky &
-    - nm-applet &
-    - redshift-gtk &
-    - udiskie --tray &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
     - ulauncher --hide-window &
-    - diodon &
-    - carillon &
   launcher:
     hotkey: "<Primary><Alt>L"
   environment:
@@ -144,60 +127,192 @@ openbox:
   # any system packages installable via PyPi
   pipx_packages: []
     #- name: carillon==1.0.2
-  # base system packages to get a working, usable OS
-  base_packages:
-    - libcairo2
-    - gufw
-    - lxpolkit
-    - ssh-askpass
-    - emacs-nox
-    - xorg
-    - x11-xserver-utils
-    - pulseaudio
-    - pavucontrol
-    - openbox
-    - obconf
-    - xscreensaver
-    - rxvt-unicode
-    - scrot
-    - pcmanfm
-    - fortune-mod
-    - conky
-    - menu
-    - notify-osd
-    - libnotify-bin
-    - pasystray
-    - network-manager
-    - network-manager-gnome
-    - cmst
-    - udisks2
-    - udiskie
-    - compton
-    - feh
-    - arandr
-    - yad
-    - lxpanel
-    - adwaita-icon-theme
-    - diodon
-    - xarchiver
-  # optional packages required for specific hardware (intended for user override)
-  device_packages: []
+  # split by platform
+  # * base system packages to get a working, usable OS
+  # * common directories used in templates and tasks
+  # * autostarting processes
+  # * convenient symbolic links
+  freebsd:
+    icons:
+      # Openbox does not use GTK theming so icons are ignored.
+      # thus, we use the Adwaita icons directly where needed
+      file_manager: /usr/local/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg
+      automount: /usr/local/share/icons/Adwaita/scalable/devices/drive-removable-media-symbolic.svg
+      terminal: /usr/local/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
+      web_browser: /usr/local/share/icons/Adwaita/scalable/apps/web-browser-symbolic.svg
+    directories:
+      home: /usr/home
+      system_applications: /usr/local/share/applications
+      usr_bin: /usr/local/bin
+      lxpanel_common: /usr/local/share/lxpanel
+      xdg_config: /usr/local/etc/xdg/autostart
+      x11_config: /usr/local/etc/X11
+      sudo_config: /usr/local/etc
+      policykit_lib: /usr/local/lib/policykit-1
+    autostart:
+      - clipit &
+      - dsbmixer -i &
+      - dsbmc -i &
+      - dsbbatmon &
+      # redshift is meant to determine location using geoclue but,
+      # due to a long-standing bug with redshift (as described
+      # https://github.com/jonls/redshift/issues/318) this does not
+      # work. There are workarounds (as described in the Arch wiki
+      # https://wiki.archlinux.org/title/Redshift#Automatic_location_based_on_GeoClue2)
+      # but there's no agent demo easily available for FreeBSD
+      # instead, just use a parsed curl call to get a rough location
+      - redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | jq -r '"\(.location.lat):\(.location.lng)"') -m randr &
+      # TODO: get carillon running again
+      - setxkbmap -layout gb
+    links:
+      - name: x-terminal-emulator
+        executable: /usr/local/bin/urxvt
+      - name: x-clipboard-manager
+        executable: /usr/local/bin/clipit
+      - name: x-www-browser
+        executable: /usr/local/bin/firefox
+    base_packages:
+      - name: editors/emacs
+      - name: security/openssh-askpass
+      - name: x11/arandr
+      - name: x11/compton-conf
+      - name: x11/lxpanel
+      - name: x11/ulauncher
+      - name: x11/yad
+      - name: x11/xscreensaver
+      - name: x11/xorg-minimal
+        environment:
+          DISABLE_VULNERABILITIES: "yes"
+      - name: x11/xorg-apps
+      - name: x11/xorg-libraries
+      - name: x11/rxvt-unicode
+      - name: x11/urxvt-perls
+      - name: x11/urxvt-font-size
+      - name: x11-themes/adwaita-icon-theme
+      - name: x11-fm/pcmanfm
+      - name: x11-wm/compton
+      - name: x11-wm/openbox
+      - name: x11-wm/obconf
+      # - name: net-mgmt/networkmgr
+      - name: sysutils/conky
+      - name: sysutils/dsbmc
+      - name: sysutils/dsbbatmon
+      - name: sysutils/polkit-qt
+      - name: sysutils/htop
+      - name: misc/fortune-mod-freebsd-classic
+      - name: deskutils/notify-osd
+      - name: deskutils/clipit
+      - name: devel/libnotify
+      - name: devel/dbus
+      - name: graphics/scrot
+      - name: graphics/feh
+      - name: archivers/xarchiver
+      - name: audio/dsbmixer
+    device_packages: []
+    templated_files:
+    - src: shortcuts/dsbmc.desktop.j2
+      dest: dsbmc.desktop
+      directory: system_applications
+    static_files: []
+  linux:
+    icons:
+      file_manager: system-file-manager
+      automounter: drive-removable-media-usb-pendrive
+      terminal: urxvt_48x48.xpm
+      web_browser: web-browser
+    directories:
+      home: /home
+      system_applications: /usr/share/applications
+      usr_bin: /usr/bin
+      lxpanel_common: /usr/share/lxpanel
+      xdg_config: /etc/xdg/autostart
+      x11_config: /etc/X11
+      sudo_config: /etc
+      policykit_lib: /usr/lib/policykit-1
+    autostart:
+      - lxpolkit &
+      - update-menus &
+      - nm-applet &
+      - redshift-gtk &
+      - udiskie --tray &
+      - diodon &
+    alternatives:
+      - name: x-terminal-emulator
+        executable: /usr/bin/urxvt
+        subcommand: set
+      - link: /usr/bin/x-www-browser
+        name: x-www-browser
+        executable: /var/lib/flatpak/exports/bin/org.mozilla.firefox
+        priority: "100"
+        subcommand: install
+      - link: /usr/bin/x-clipboard-manager
+        name: x-clipboard-manager
+        executable: /usr/bin/diodon
+        priority: "100"
+        subcommand: install
+    base_packages:
+      - libcairo2
+      - gufw
+      - lxpolkit
+      - ssh-askpass
+      - emacs-nox
+      - xorg
+      - x11-xserver-utils
+      - pulseaudio
+      - pavucontrol
+      - openbox
+      - obconf
+      - xscreensaver
+      - rxvt-unicode
+      - scrot
+      - pcmanfm
+      - fortune-mod
+      - conky
+      - menu
+      - notify-osd
+      - libnotify-bin
+      - pasystray
+      - network-manager
+      - network-manager-gnome
+      - udisks2
+      - udiskie
+      - compton
+      - compton-conf
+      - feh
+      - arandr
+      - yad
+      - lxpanel
+      - adwaita-icon-theme
+      - diodon
+      - xarchiver
+    # optional packages required for specific hardware (intended for user override)
+    device_packages: []
+    static_files:
+    - src: shortcuts/gufw.desktop
+      dest: /usr/share/applications/gufw.desktop
+    # fix for borked desktop file in notify-osd package
+    - src: shortcuts/notify-osd.desktop
+      dest: notify-osd.desktop
+      directory: xdg_config
   user_static_files:
   - src: lxpanel/config
     dest: .config/lxpanel/default/config
   - src: lxpanel/launchtaskbar.cfg
     dest: .config/lxpanel/launchtaskbar.cfg
+  templated_files:
+  - src: sudo.conf.j2
+    dest: sudo.conf
+    directory: sudo_config
+  - src: shortcuts/x-www-browser.desktop.j2
+    dest: x-www-browser.desktop
+    directory: system_applications
+  - src: shortcuts/pcmanfm.desktop.j2
+    dest: pcmanfm.desktop
+    directory: system_applications
+  - src: shortcuts/x-terminal-emulator.desktop.j2
+    dest: x-terminal-emulator.desktop
+    directory: system_applications
   static_files:
-  - src: sudo.conf
-    dest: /etc/sudo.conf
   - src: mimeapps.list
-    dest: /usr/share/applications/mimeapps.list
-  - src: shortcuts/gufw.desktop
-    dest: /usr/share/applications/gufw.desktop
-  - src: shortcuts/x-www-browser.desktop
-    dest: /usr/share/applications/x-www-browser.desktop
-  - src: shortcuts/x-terminal-emulator.desktop
-    dest: /usr/share/applications/x-terminal-emulator.desktop
-  # fix for borked desktop file in notify-osd package
-  - src: shortcuts/notify-osd.desktop
-    dest: /etc/xdg/autostart/notify-osd.desktop
+    dest: mimeapps.list
+    directory: system_applications

@@ -1,0 +1,9 @@
+---
+- name: create users
+  user: name={{ item.username }} comment="{{ item.name }}"
+        password={{ item.password|default(defaults.password) }}
+        shell={{ item.shell }}
+  with_items: "{{ users }}"
+
+- name: configure sysctl settings
+  template: src=sysctl.conf.j2 dest=/etc/sysctl.conf

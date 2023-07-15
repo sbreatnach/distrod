@@ -1,0 +1,26 @@
+---
+- name: Add pf rules
+  template:
+    src: pf.conf.j2
+    dest: /etc/pf.conf
+    owner: root
+    mode: '0640'
+
+- name: Enable pf configuration
+  community.general.sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - name: pf_enable
+      value: "YES"
+    - name: pf_flags
+      value: ""
+    - name: pf_rules
+      value: "/etc/pf.conf"
+    - name: pflog_enable
+      value: "YES"
+    - name: pflog_logfile
+      value: "/var/log/pflog"
+    - name: pflog_flags
+      value: ""

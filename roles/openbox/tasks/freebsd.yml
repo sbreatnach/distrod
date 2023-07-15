@@ -1,0 +1,38 @@
+---
+- name: "freebsd : install base packages"
+  community.general.portinstall:
+    name: "{{ item.name }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  environment: "{{ item.environment|default({}) }}"
+  with_items: "{{ openbox.freebsd.base_packages }}"
+
+- name: "freebsd : install device packages"
+  community.general.portinstall:
+    name: "{{ item.name }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  environment: "{{ item.environment|default({}) }}"
+  with_items: "{{ openbox.freebsd.device_packages }}"
+
+- name: "freebsd : set alternatives"
+  ansible.builtin.file:
+    src: "{{ item.executable }}"
+    dest: /usr/bin/{{ item.name }}
+    state: link
+  with_items: "{{ openbox.freebsd.links }}"
+
+- name: "freebsd : enable modules"
+  community.general.sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items:
+    # DSBM daemon for automounting of devices
+    - name: dsbmd_enable
+      value: "YES"
+
+- name: "freebsd : copy templated files"
+  template:
+    src: "{{ item.src }}"
+    dest: "{% if item.directory is defined %}{{ openbox.freebsd.directories[item.directory] }}/{% endif %}{{ item.dest }}"
+  with_items: "{{ openbox.freebsd.templated_files }}"

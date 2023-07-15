@@ -1,0 +1,14 @@
+---
+- name: install build packages (linux)
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ buildessential.linux.packages }}"
+  when: os_target == 'linux'
+
+- name: install build packages (freebsd)
+  community.general.pkgng:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ buildessential.freebsd.packages }}"
+  when: os_target == 'freebsd'

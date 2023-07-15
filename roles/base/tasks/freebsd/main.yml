@@ -1,0 +1,145 @@
+---
+- name: custom ports patches
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    # 13.2: bugs in file size patches - not backported to stable :-(
+    - src: patch/sysutils/consolekit2/distinfo
+      dest: /usr/ports/sysutils/consolekit2/distinfo
+    - src: patch/lang/ghc/distinfo
+      dest: /usr/ports/lang/ghc/distinfo
+  when: package_installer == 'source'
+
+- name: install base packages
+  community.general.portinstall:
+    name: "{{ item }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  with_items: "{{ base.freebsd.packages }}"
+
+- name: install machine packages
+  community.general.portinstall:
+    name: "{{ item }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  with_items: "{{ machine.packages }}"
+
+- name: update login capabilities database
+  template: src=login.conf.j2 dest=/etc/login.conf
+
+- block:
+    - name: set WiFi sysrc
+      community.general.sysrc:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+      with_items:
+        - name: wlans_iwm0
+          value: "wlan0"
+        - name: ifconfig_wlan0
+          value: "WPA DHCP"
+    - name: create WiFi configuration files
+      template:
+        src: "{{ item.filename }}"
+        dest: "{{ item.dest }}"
+      with_items:
+        - filename: wpa_supplicant.conf.j2
+          dest: "/etc/wpa_supplicant.conf"
+  when: machine.wifi.enabled
+
+- block:
+    - name: install microcode packages
+      community.general.portinstall:
+        name: "{{ machine.microcode[machine.cpu].package }}"
+        state: present
+        use_packages: "{{ package_installer == 'precompiled' }}"
+    - name: enable microcode updates
+      community.general.sysrc:
+        name: microcode_update_enable
+        value: "YES"
+    - name: create microcode boot config
+      template:
+        src: microcode.conf.j2
+        dest: /boot/loader.conf.d/microcode.conf
+  when: machine.microcode[machine.cpu].enabled
+
+- name: running geoclue as background service
+  block:
+    - name: enable geoclue service
+      community.general.sysrc:
+        name: geoclue_enable
+        value: "YES"
+    - name: create geoclue rc script
+      template:
+        src: rc.d/geoclue.j2
+        dest: /usr/local/etc/rc.d/geoclue
+    - name: create geoclue config
+      template:
+        src: geoclue.conf.j2
+        dest: /usr/local/etc/geoclue/geoclue.conf
+
+- name: commit login capabilities changes, if any
+  shell: cap_mkdb /etc/login.conf
+
+- name: load video driver modules
+  shell: sysrc kld_list+={{ item }}
+  with_items: "{{ machine.modules }}"
+
+- name: KVM/QEMU requires special workaround for functional Xorg mouse
+  block:
+    - name: install drivers
+      community.general.portinstall:
+        name: "{{ item }}"
+        state: present
+        use_packages: "{{ package_installer == 'precompiled' }}"
+      with_items:
+        - utouch-kmod
+        - xf86-input-evdev
+    - name: create boot config
+      copy:
+        src: qemu.conf
+        dest: /boot/loader.conf.d/qemu.conf
+  when: machine_type == 'qemu'
+
+- name: "enable power management modules"
+  community.general.sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items:
+    - name: powerd_enable
+      value: "YES"
+    - name: powerd_flags
+      value: "-a hiadaptive -b adaptive"
+    - name: performance_cx_lowest
+      value: Cmax
+    - name: economy_cx_lowest
+      value: Cmax
+  when: machine_type == 'laptop'
+
+- name: load device modules
+  shell: sysrc kld_list+={{ item }}
+  with_items:
+    - usbhid
+    - acpi_video
+
+- name: set device boot config
+  template:
+    src: boot/devices.conf.j2
+    dest: /boot/loader.conf.d/devices.conf
+
+- name: set device sysrc
+  community.general.sysrc:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - key: webcamd_enable
+      value: "YES"
+
+- name: set custom hardware sysrc
+  community.general.sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items: "{{ machine.sysrc }}"
+
+# TODO: this doesn't work yet
+#- import_tasks: linux_compat.yml

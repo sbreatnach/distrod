@@ -30,10 +30,13 @@ Works on Xenial:
 All Ansible role pre-requisites for DistroD should be installed initially:
 
     ansible-galaxy install -r requirements.yml
+    ansible-galaxy collection install community.general
 
 # Target Configuration
 
-**Debian Buster** is the targeted base distro.
+## Linux
+
+**Debian Bookworm** is the current targeted base distro.
 Before running the playbook, ensure you can SSH to the target machine
 beforehand. For example:
 
@@ -42,6 +45,28 @@ beforehand. For example:
 The bare minimum your target machine must have is Python3:
 
     sudo apt install python3
+
+## FreeBSD
+
+**v13.2** is the current targeted version. 
+
+If installing from ports, ensure you have installed the ports tree and the kernel
+source as part of the OS install process.
+
+Standard user must be part of the `wheel` group. Python must
+be installed before running:
+
+```shell
+su
+# if using binary installs
+pkg bootstrap -y
+pkg update
+pkg install -y lang/python3
+# if using source installs
+cd /usr/ports/lang/python3
+make config-recursive
+make install clean
+```
 
 # Playbook Configuration
 
@@ -121,14 +146,56 @@ testbed_vars.yml and testbed_inventory:
 
     ansible-playbook -b -e @testbed_vars.yml -i testbed_inventory -k -K playbook.yml
 
+For FreeBSD, sudo is not available, thus:
+
+```shell
+ansible-playbook -b --become-method=su -i freebsd_inventory -k -K playbook.yml
+# if running against KVM/QEMU VM, some workarounds must be enabled
+ansible-playbook -e machine_type=qemu -b --become-method=su -i freebsd_inventory -k -K playbook.yml
+```
+
+# Pre-configured Hardware
+
+Some YAML files are included with pre-configured options for certain hardware.
+
+## Thinkpad T480s
+
+```shell
+# create settings with WiFi creds
+tee secret.yml << EOF
+machine:
+  wifi:
+    ssid: ${WIFI_SSID}
+    psk: ${WIFI_PASSWORD}
+EOF
+# FreeBSD version compiled from ports tree
+ansible-playbook -e package_installer=source \
+    -e @secret.yml \
+    -e @hardware/thinkpad_t480s/freebsd.yml \
+    -b --become-method=su -i freebsd_inventory -k -K playbook.yml
+```
+
 # TODO
 
-* Revert to network manager for network connection handling
+* Re-integrate carillon for Linux + FreeBSD
 * earlyoom for better low-memory handling
 * Dynamic monitor and resolution detection
 * Configure fstab based on partitions specified
-* Use systemd for daemons to enable automatic restarting on crashes
 * VNC server
 * CUPS install and printer/scanner config
 ** Take IP address (e.g. 192.168.0.115) and add based on printer driver selection
 ** Install sane-airscan, update /etc/sane.d/epson2.conf and set explicit IP address
+
+## Linux
+
+* Use systemd for daemons to enable automatic restarting on crashes
+
+## FreeBSD
+
+* Configure networkmgr automatically
+* Find better clipboard manager
+* Configure media buttons e.g. backlight down/up, volume down/up, etc.
+* Personal role which sets up:
+** net/onedrive
+** games/linux-steam-utils
+** https://github.com/mrclksr/linux-browser-installer for DRMed content

@@ -1,9 +1,26 @@
 ---
 - name: install packages
-  apt: name={{ xdm.packages }} state=present
+  apt: name={{ xdm.linux.packages }} state=present
+  when: os_target == 'linux'
+
+- name: install packages
+  community.general.portinstall:
+    name: "{{ item }}"
+    state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
+  with_items: "{{ xdm.freebsd.packages }}"
+  when: os_target == 'freebsd'
+
+- name: configure Xwrap for XDM usage
+  copy:
+    src: Xwrapper.config
+    dest: "{{ xdm[os_target].directories.x11_config }}/Xwrapper.config"
+  when: os_target == 'freebsd'
 
 - name: configure X servers for every xdm session
-  template: src=Xservers.j2 dest=/etc/X11/xdm/Xservers
+  template: src=Xservers.j2 dest={{ xdm[os_target].directories.x11_config }}/xdm/Xservers
 
-# TODO: make this optional based on system if supporting older Debian systems
-- include: systemd.yml
+- name: enable XDM
+  service:
+    name: xdm
+    enabled: yes

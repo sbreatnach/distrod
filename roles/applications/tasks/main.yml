@@ -1,19 +1,9 @@
 ---
-- name: add repository keys
-  apt_key: state=present url={{ item.url }}
-  when: item.url is defined
-  with_items: "{{ applications.repositories }}"
+- import_tasks: linux.yml
+  when: os_target == 'linux'
 
-- name: add repositories
-  apt_repository: repo={{ item.entry }} update_cache=yes
-  with_items: "{{ applications.repositories }}"
+- import_tasks: freebsd.yml
+  when: os_target == 'freebsd'
 
-- include: package.yml
-  with_items: "{{ applications.packages }}"
-
-- include: package.yml
+- include_tasks: package.yml
   with_items: "{{ applications.user_packages }}"
-
-- name: install flatpaks
-  flatpak: name={{ item.name }}
-  with_items: "{{ applications.flatpaks }}"

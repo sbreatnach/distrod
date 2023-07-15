@@ -1,7 +1,7 @@
 ---
 - name: user-specific facts
   set_fact:
-    home_dir: /home/{{ cur_username }}
+    home_dir: "{{ openbox[os_target].directories.home }}/{{ cur_username }}"
 
 - name: create config dirs
   become_user: "{{ cur_username }}"
@@ -22,6 +22,10 @@
   become_user: "{{ cur_username }}"
   template: src=xinitrc.j2 dest={{ home_dir }}/.xinitrc mode=0744
 
+- name: create X mod map
+  become_user: "{{ cur_username }}"
+  template: src=xmodmaprc.j2 dest={{ home_dir }}/.xmodmaprc mode=0744
+
 - name: create config files
   become_user: "{{ cur_username }}"
   template: src={{ item.file }}.j2 dest={{ home_dir }}/{{ item.dir }}/{{ item.output_file|default(item.file) }}
@@ -40,3 +44,26 @@
 - name: copy resources
   become_user: "{{ cur_username }}"
   copy: src={{ defaults.dirs.resources }} dest={{ home_dir }}/resources
+
+- block:
+    - name: setting locale for {{ cur_username }}
+      become_user: "{{ cur_username }}"
+      template: src=login.conf.j2 dest={{ home_dir }}/.login_conf
+
+    - name: add {{ cur_username }} to important groups
+      shell: pw groupmod {{ item }} -m {{ cur_username }}
+      with_items:
+        - webcamd
+        - wheel
+        - operator
+        - video
+
+    - name: create missing xsession
+      become_user: "{{ cur_username }}"
+      copy:
+        src: xsession
+        dest: "{{ home_dir }}/.xsession"
+  when: os_target == 'freebsd'
+
+- name: enable sudo access for {{ cur_username }}
+  template: src=sudoers.j2 dest={{ openbox[os_target].directories.sudo_config }}/sudoers.d/{{ cur_username }}

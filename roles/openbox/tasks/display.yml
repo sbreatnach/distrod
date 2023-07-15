@@ -1,6 +1,6 @@
 ---
 - name: install Python packages
-  pip: name=autorandr version=1.1
+  community.general.pipx: name=autorandr version=1.1
 
 - name: create default screenlayout
   become_user: "{{ cur_user.username }}"

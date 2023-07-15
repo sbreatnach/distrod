@@ -1,3 +1,0 @@
----
-- name: enable xdm in systemd
-  command: systemctl enable xdm

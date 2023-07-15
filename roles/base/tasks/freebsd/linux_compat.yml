@@ -1,0 +1,63 @@
+---
+- name: install required packages
+  community.general.pkgng:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - debootstrap
+    - pulseaudio
+
+- name: create Debian rc file
+  template:
+    src: rc.d/debian.j2
+    dest: /usr/local/etc/rc.d/debian
+    mode: 0755
+
+- name: create chroot directories
+  file:
+    path: "{{ base.freebsd.compat.directories.root }}{{ item }}"
+    state: directory
+  with_items:
+    - /proc
+    - /sys
+    - /dev
+    - /dev/fd
+    - /dev/shm
+    - /tmp
+
+- name: create Debian chroot
+  shell: debootstrap --no-check-gpg bookworm {{ base.freebsd.compat.directories.root }}
+
+- name: start Debian service manually
+  service:
+    name: debian
+    state: started
+
+- name: configure timezone
+  block:
+    - name: set default adjtime
+      file:
+        src: chroot/adjtime
+        dest: "{{ base.freebsd.compat.directories.root }}/etc/adjtime"
+    - name: use host timezone
+      copy:
+        src: /var/db/zoneinfo
+        dest: "{{ base.freebsd.compat.directories.root }}/etc/timezone"
+        remote_src: true
+    - name: link local time file
+      shell: ln -sf /usr/share/zoneinfo/$(cat /var/db/zoneinfo)
+             {{ base.freebsd.compat.directories.root }}/etc/localtime
+    - name: reconfigure chroot with timezone
+      shell: chroot {{ base.freebsd.compat.directories.root }} /bin/bash -c
+             "dpkg-reconfigure --frontend noninteractive tzdata"
+
+- name: install chroot base packages
+  shell: chroot {{ base.freebsd.compat.directories.root }} /bin/bash -c 'apt update && apt remove -y rsyslog && apt install -y gnupg pulseaudio'
+
+- name: run Debian Linux on startup
+  community.general.sysrc:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - key: debian_enable
+      value: "YES"

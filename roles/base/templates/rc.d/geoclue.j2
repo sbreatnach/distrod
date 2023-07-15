@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# PROVIDE: geoclue
+# REQUIRE: DAEMON dbus
+#
+# Add the following lines to /etc/rc.conf to enable geoclue service:
+#
+# geoclue_enable="YES"
+#
+
+. /etc/rc.subr
+
+: ${geoclue_enable=NO} ${geoclue_flags="--timeout=0"}
+
+name=geoclue
+rcvar=geoclue_enable
+
+command="/usr/local/libexec/geoclue"
+pidfile="/var/run/geoclue/pid"
+
+start_precmd="geoclue_prestart"
+stop_postcmd="geoclue_poststop"
+
+geoclue_prestart()
+{
+    mkdir -p /var/run/geoclue
+}
+
+geoclue_poststop()
+{
+    rm -f $pidfile
+}
+
+load_rc_config ${name}
+run_rc_command "$1"

@@ -602,7 +602,9 @@
 
   <!-- default menu file (or custom one in $HOME/.config/openbox/) -->
   <!-- system menu files on Debian systems -->
+  {% if os_target == 'linux' %}
   <file>/var/lib/openbox/debian-menu.xml</file>
+  {% endif %}
   <file>menu.xml</file>
   <file>app_menu.xml</file>
   <hideDelay>200</hideDelay>

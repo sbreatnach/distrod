@@ -8,3 +8,10 @@ sh ~/.screenlayout/default.sh
 {% for command in openbox.autostart %}
 {{ command }}
 {% endfor %}
+
+{% for command in openbox[os_target].autostart %}
+{{ command }}
+{% endfor %}
+
+# load extra personal autostart script if available
+[ -f ~/.config/openbox/autostart.personal ] && . ~/.config/openbox/autostart.personal

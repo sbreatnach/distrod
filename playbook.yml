@@ -4,18 +4,18 @@
   roles:
     - role: base
       tags: [base]
-    - role: ANXS.hostname
-      tags: [hostname]
-    - role: Stouts.locale
+    - role: locale
       tags: [locale]
-    - role: ANXS.ntp
+    - role: ntp
       tags: [ntp]
-    - role: ANXS.build-essential
+    - role: build-essential
       tags: [utils]
     - role: weareinteractive.ufw
+      when: ansible_facts['os_family'] == 'Debian'
       tags: [firewall]
-    - role: proprietary
-      tags: [proprietary]
+    - role: pfw
+      when: ansible_facts['os_family'] == 'FreeBSD'
+      tags: [firewall]
     - role: applications
       tags: [applications]
     - role: openbox

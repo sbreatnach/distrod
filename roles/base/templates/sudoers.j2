@@ -1,5 +1,0 @@
-{% for user in users %}
-{% if user.sudoer is defined and user.sudoer %}
-{{ user.username }}   ALL=(ALL) ALL
-{% endif %}
-{% endfor %}

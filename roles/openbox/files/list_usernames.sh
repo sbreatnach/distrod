@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+# check the first 1000 standard UIDs for any existing new users
+eval echo {1000..2000} | xargs -n1 getent passwd | cut -d: -f1
