@@ -192,7 +192,6 @@ ansible-playbook -e package_installer=source \
 
 ## FreeBSD
 
-* Configure networkmgr automatically
 * Find better clipboard manager
 * Configure media buttons e.g. backlight down/up, volume down/up, etc.
 * Personal role which sets up:

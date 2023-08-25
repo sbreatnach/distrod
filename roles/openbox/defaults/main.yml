@@ -154,6 +154,7 @@ openbox:
       - dsbmixer -i &
       - dsbmc -i &
       - dsbbatmon &
+      - wpa_gui &
       # redshift is meant to determine location using geoclue but,
       # due to a long-standing bug with redshift (as described
       # https://github.com/jonls/redshift/issues/318) this does not
@@ -193,7 +194,7 @@ openbox:
       - name: x11-wm/compton
       - name: x11-wm/openbox
       - name: x11-wm/obconf
-      # - name: net-mgmt/networkmgr
+      - name: net/wpa_supplicant_gui
       - name: sysutils/conky
       - name: sysutils/dsbmc
       - name: sysutils/dsbbatmon
