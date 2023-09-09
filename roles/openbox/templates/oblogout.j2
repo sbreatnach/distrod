@@ -12,7 +12,7 @@ case "$?" in
 2)
     xscreensaver-command -lock
     {% if os_target == 'freebsd' %}
-    /etc/rc.suspend acpi S3
+    /usr/sbin/acpiconf -s S3
     {% else %}
     systemctl suspend
     {% endif %}

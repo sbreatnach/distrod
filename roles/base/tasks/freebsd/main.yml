@@ -1,8 +1,9 @@
 ---
-- name: custom ports patches
+- name: Custom ports patches
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: 0644
   with_items:
     # 13.2: bugs in file size patches - not backported to stable :-(
     - src: patch/sysutils/consolekit2/distinfo

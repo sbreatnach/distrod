@@ -1,11 +1,12 @@
 ---
 - name: install required packages
-  community.general.pkgng:
+  community.general.portinstall:
     name: "{{ item }}"
     state: present
+    use_packages: "{{ package_installer == 'precompiled' }}"
   with_items:
-    - debootstrap
-    - pulseaudio
+    - sysutils/debootstrap
+    - audio/pulseaudio
 
 - name: create Debian rc file
   template:
@@ -26,7 +27,7 @@
     - /tmp
 
 - name: create Debian chroot
-  shell: debootstrap --no-check-gpg bookworm {{ base.freebsd.compat.directories.root }}
+  shell: debootstrap --no-check-gpg bullseye {{ base.freebsd.compat.directories.root }}
 
 - name: start Debian service manually
   service:
@@ -61,3 +62,5 @@
   with_items:
     - key: debian_enable
       value: "YES"
+    - key: linux_enable
+      value: "NO"

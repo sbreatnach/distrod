@@ -192,9 +192,66 @@ ansible-playbook -e package_installer=source \
 
 ## FreeBSD
 
+* Review tweaks listed at https://www.c0ffee.net/blog/freebsd-on-a-laptop
 * Find better clipboard manager
+* Configure autofs for automatic mounting
+* Install extra packages
+** sysutils/fusefs-ext2
+** sysutils/fusefs-exfat
+** sysutils/fusefs-hfsfuse
+** sysutils/fusefs-jmtpfs
+** sysutils/fusefs-ntfs
+** sysutils/fusefs-smbnetfs
 * Configure media buttons e.g. backlight down/up, volume down/up, etc.
 * Personal role which sets up:
+** rustup + uninstalls builtin rust
+** basic emacs config
+** custom bash aliases etc
 ** net/onedrive
+** devel/hs-ShellCheck
+** dns/bind-tools
+** sysutils/ansible
+** sysutils/py-ansible-lint
+** games/libretro
+** games/retroarch
 ** games/linux-steam-utils
 ** https://github.com/mrclksr/linux-browser-installer for DRMed content
+
+### Linux Compat
+
+/etc/rc.conf
+```
+linux_enable="YES"
+```
+cd /usr/ports/games/linux-steam-utils
+make config-recursive
+make install clean
+
+### smbnetfs instructions
+
+Load fusefs:
+	# kldload fusefs
+
+To load fusefs at boot time, add it to rc.conf:
+	# sysrc kld_list+=fusefs
+
+After fusefs is loaded, and setting
+	# sysctl vfs.usermount=1
+
+you should make .smb directory in your homedir:
+	% mkdir ~/.smb
+
+Copy your smb.conf (usually in /usr/local/etc/) and
+/usr/local/share/doc/smbnetfs-0.6.1/smbnetfs.conf to this directory:
+	% cp /usr/local/share/doc/smbnetfs-*/smbnetfs.conf ~/.smb/
+
+Create ~/.smb/smbnetfs.auth
+```
+auth	nas.home	WORKGROUP/<username>	<password>
+```
+Make mountpoint for smb network and mount it:
+	% mkdir ~/mounts
+	% smbnetfs ~/mounts
+
+Now you can get access to smb shares in your network, for example:
+	% cd ~/mounts/nas.home
