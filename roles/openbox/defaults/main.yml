@@ -95,6 +95,12 @@ openbox:
     desktops:
       number: 2
     keybinds:
+      - key: XF86MonBrightnessDown
+        name: Execute
+        command: xbacklight -dec 10
+      - key: XF86MonBrightnessUp
+        name: Execute
+        command: xbacklight -inc 10
       - key: W-l
         name: Execute
         command: xscreensaver-command -lock
