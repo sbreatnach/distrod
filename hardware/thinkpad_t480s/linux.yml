@@ -1,0 +1,23 @@
+machine_type: laptop
+machine:
+  wifi:
+    enabled: true
+  cpu: intel
+  microcode:
+    intel:
+      enabled: true
+
+display:
+  dpi: 168
+  scaling:
+    gdk_scale: 2
+    gdk_dpi_scale: 0.5
+    qt_auto_screen_scale_factor: 1
+openbox:
+  panel:
+    width: 100
+    height: 42
+    icon_size: 40
+    max_task_width: 250
+xdm:
+  display: intel

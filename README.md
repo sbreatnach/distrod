@@ -185,6 +185,22 @@ ansible-playbook -e package_installer=source \
 * CUPS install and printer/scanner config
 ** Take IP address (e.g. 192.168.0.115) and add based on printer driver selection
 ** Install sane-airscan, update /etc/sane.d/epson2.conf and set explicit IP address
+* Personal role which sets up common data
+
+## Emacs
+
+```lisp
+;; Basic settings for encoding, tabs and backup files
+(setq default-buffer-file-coding-system 'utf-8-unix)
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+(setq backup-by-copying t)
+(setq tab-width 4)
+(setq c-basic-offset 4)
+(setq c-brace-offset 0)
+(setq-default indent-tabs-mode nil)
+(setq tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 120)))
+(setq column-number-mode t)
+```
 
 ## Linux
 

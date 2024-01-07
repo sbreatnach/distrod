@@ -20,6 +20,7 @@ base:
   linux:
     packages:
       - acpid
+      - xbacklight
       - git
       - pipx
       - pkgconf

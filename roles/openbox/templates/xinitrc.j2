@@ -18,6 +18,7 @@ if [ -d {{ openbox[os_target].directories.x11_config }}/xinit/xinitrc.d ] ; then
 fi
 
 [ -f ~/.Xresources ] && xrdb -merge "-I$HOME" ~/.Xresources
+[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
 {% if openbox.touchpad.enabled and os_target == 'linux' %}
 # Disable tap to click on touchpad

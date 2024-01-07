@@ -116,6 +116,7 @@ openbox:
   autostart:
     - compton -b &
     - xscreensaver -no-splash &
+    - xss-lock -- xscreensaver-command -lock &
     - lxpanel &
     - conky &
     - feh --randomize --recursive --bg-center ~/resources/backgrounds/* &
@@ -237,6 +238,7 @@ openbox:
       - redshift-gtk &
       - udiskie --tray &
       - diodon &
+      - cbatticon &
     alternatives:
       - name: x-terminal-emulator
         executable: /usr/bin/urxvt
@@ -259,11 +261,13 @@ openbox:
       - emacs-nox
       - xorg
       - x11-xserver-utils
+      - cbatticon
       - pulseaudio
       - pavucontrol
       - openbox
       - obconf
       - xscreensaver
+      - xss-lock
       - rxvt-unicode
       - scrot
       - pcmanfm

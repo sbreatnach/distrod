@@ -1,5 +1,6 @@
 ---
 xdm:
+  display: generic
   freebsd:
     directories:
       x11_config: /usr/local/etc/X11
